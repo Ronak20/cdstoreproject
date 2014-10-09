@@ -1,20 +1,10 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.restws.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.cdstore.dbagent.model.CdDrive;
 
 /*DROP TABLE IF EXISTS CD;
  CREATE TABLE CD (
@@ -24,34 +14,32 @@ import org.hibernate.annotations.LazyCollectionOption;
  category  ENUM('COUNTRY','POP','ROCK') NOT NULL,
  PRIMARY KEY(cdid)
  ) ;*/
-
-@Entity
 @XmlRootElement
-@Table(name = "cd")
-public class CdDrive {
+public class CdDriveJsonModel {
 
-	@Id
-	@Column(name = "cdid")
-	private String cdId;
-
-	@Column(name = "title")
-	private String title;
-
-	@Column(name = "price")
-	private Integer price;
-
-	@Column(name = "category")
-	private String category;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "poId.cdDrive", cascade = CascadeType.ALL)
-	List<PurchaseOrderItem> purchaseOrderItem;
-
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cdDrive", orphanRemoval = true)
-	List<VisitEvent> visitEventList;
+	public CdDriveJsonModel(CdDrive cdDrive) {
+		setCategory(cdDrive.getCategory());
+		setCdId(cdDrive.getCdId());
+		setPrice(cdDrive.getPrice());
+		setTitle(cdDrive.getTitle());
+	}
 
 	@XmlElement
+	private String cdId;
+
+	@XmlElement
+	private String title;
+
+	@XmlElement
+	private Integer price;
+
+	@XmlElement
+	private String category;
+
+	List<PurchaseOrderItem> purchaseOrderItem;
+
+	List<VisitEvent> visitEventList;
+
 	public String getCdId() {
 		return cdId;
 	}
@@ -60,7 +48,6 @@ public class CdDrive {
 		this.cdId = cdId;
 	}
 
-	@XmlElement
 	public String getTitle() {
 		return title;
 	}
@@ -69,7 +56,6 @@ public class CdDrive {
 		this.title = title;
 	}
 
-	@XmlElement
 	public Integer getPrice() {
 		return price;
 	}
@@ -78,7 +64,6 @@ public class CdDrive {
 		this.price = price;
 	}
 
-	@XmlElement
 	public String getCategory() {
 		return category;
 	}
@@ -87,7 +72,6 @@ public class CdDrive {
 		this.category = category;
 	}
 
-	@XmlTransient//@XmlElementWrapper(name = "purchaseOrderItemList")
 	public List<PurchaseOrderItem> getPurchaseOrderItem() {
 		return purchaseOrderItem;
 	}
@@ -96,7 +80,6 @@ public class CdDrive {
 		this.purchaseOrderItem = purchaseOrderItem;
 	}
 
-	@XmlTransient//@XmlElementWrapper(name = "visitEventList")
 	public List<VisitEvent> getVisitEventList() {
 		return visitEventList;
 	}
@@ -131,7 +114,7 @@ public class CdDrive {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CdDrive other = (CdDrive) obj;
+		CdDriveJsonModel other = (CdDriveJsonModel) obj;
 		if (category == null) {
 			if (other.category != null)
 				return false;

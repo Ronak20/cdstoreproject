@@ -24,7 +24,7 @@ public class Start {
 	static void startEmbeddedServer() throws IOException {
 
 		// Create test web application context.
-		WebappContext webappContext = new WebappContext("Test Context");
+		WebappContext webappContext = new WebappContext("CDStore Context");
 		webappContext
 				.addContextInitParameter("contextClass",
 						"org.springframework.web.context.support.XmlWebApplicationContext");
@@ -47,13 +47,13 @@ public class Start {
 				"com.sun.jersey.api.container.filter.LoggingFilter");
 
 		servletRegistration.setInitParameter("javax.ws.rs.Application",
-				"com.cdstore.restws.MyDemoApplication");
+				"com.cdstore.restws.CdStoreResourceConfig");
 
 		servletRegistration
 				.setInitParameter("com.sun.jersey.config.property.packages",
 						"com.cdstore.restws");
-		servletRegistration.setInitParameter(
-				"com.sun.jersey.api.json.POJOMappingFeature", "true");
+		/*servletRegistration.setInitParameter(
+				"com.sun.jersey.api.json.POJOMappingFeature", "true");*/
 		servletRegistration.addMapping("/*");
 
 		HttpServer server = new HttpServer();

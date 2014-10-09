@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import com.cdstore.dbagent.dao.def.ICdDriveDao;
 import com.cdstore.dbagent.model.CdDrive;
 
-
-public class CdDriveDao {
+public class CdDriveDao implements ICdDriveDao {
 
 	private Session session;
 
