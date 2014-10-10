@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class VisitEvent {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cdid", referencedColumnName = "cdid")
-	CdDrive cdDrive;
+	CD cdDrive;
 
 	@Column(name = "eventtype")
 	String eventType;
@@ -42,11 +42,11 @@ public class VisitEvent {
 		this.day = day;
 	}
 
-	public CdDrive getCdDrive() {
+	public CD getCdDrive() {
 		return cdDrive;
 	}
 
-	public void setCdDrive(CdDrive cdDrive) {
+	public void setCdDrive(CD cdDrive) {
 		this.cdDrive = cdDrive;
 	}
 

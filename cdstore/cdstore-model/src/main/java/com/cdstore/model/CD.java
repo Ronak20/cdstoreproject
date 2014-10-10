@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import com.cdstore.dbagent.serializer.CdDriveSerializer;
+import com.cdstore.model.serializer.CdDriveSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /*DROP TABLE IF EXISTS CD;
@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Entity
 @Table(name = "cd")
 @JsonSerialize(using = CdDriveSerializer.class)
-public class CdDrive {
+public class CD {
 
 	@Id
 	@Column(name = "cdid")
@@ -124,7 +124,7 @@ public class CdDrive {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CdDrive other = (CdDrive) obj;
+		CD other = (CD) obj;
 		if (category == null) {
 			if (other.category != null)
 				return false;

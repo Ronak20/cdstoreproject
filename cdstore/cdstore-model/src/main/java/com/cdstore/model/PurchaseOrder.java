@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /*CREATE TABLE PO (
  id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -80,7 +79,6 @@ public class PurchaseOrder {
 		this.status = status;
 	}
 
-	@XmlTransient
 	public Address getAddress() {
 		return address;
 	}

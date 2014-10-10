@@ -4,7 +4,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
-import com.cdstore.restws.endpoint.CdDriveRest;
+import com.cdstore.restws.endpoint.CdRest;
 
 /**
  * 
@@ -19,6 +19,6 @@ public class CdStoreResourceConfig extends ResourceConfig {
 	public CdStoreResourceConfig() {
 		this.register(RequestContextFilter.class);
 		this.register(JacksonFeature.class);
-		this.register(CdDriveRest.class);
+		this.register(CdRest.class);
 	}
 }

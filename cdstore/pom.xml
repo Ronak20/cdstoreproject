@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.cdstore</groupId>
-	<artifactId>CDStore</artifactId>
+	<artifactId>cdstore</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>cdstore</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,5 +26,6 @@
 		<module>cdstore-dbagent</module>
 		<module>cdstore-restws</module>
 		<module>cdstore-webapp</module>
+		<module>cdstore-model</module>
 	</modules>
 </project>

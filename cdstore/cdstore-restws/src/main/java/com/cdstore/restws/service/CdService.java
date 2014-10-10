@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 
-import com.cdstore.dbagent.dao.CdDriveDao;
-import com.cdstore.dbagent.model.CdDrive;
+import com.cdstore.dbagent.dao.CdDao;
 import com.cdstore.dbagent.util.HibernateUtil;
+import com.cdstore.model.CD;
 import com.cdstore.restws.service.def.ICdService;
 
 public class CdService implements ICdService {
 
-	private CdDriveDao cdDriveDao;
+	private CdDao cdDao;
 
 	public CdService() {
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-		cdDriveDao = new CdDriveDao(sessionFactory.openSession());
+		cdDao = new CdDao(sessionFactory.openSession());
 	}
 
-	public List<CdDrive> getAllCD() {
-		return cdDriveDao.getCdDriveList();
+	public List<CD> getAllCD() {
+		return cdDao.getAllCD();
 	}
 }

@@ -2,8 +2,8 @@ package com.cdstore.restws.service.def;
 
 import java.util.List;
 
-import com.cdstore.dbagent.model.CdDrive;
+import com.cdstore.model.CD;
 
 public interface ICdService {
-	List<CdDrive> getAllCD();
+	List<CD> getAllCD();
 }

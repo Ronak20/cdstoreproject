@@ -1,8 +1,8 @@
-package com.cdstore.dbagent.serializer;
+package com.cdstore.model.serializer;
 
 import java.io.IOException;
 
-import com.cdstore.dbagent.model.CdDrive;
+import com.cdstore.model.CD;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -12,13 +12,12 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  * Serializer for cd drive
  * 
  * @author Ronak
- *
  */
-public class CdDriveSerializer extends JsonSerializer<CdDrive> {
-	
+public class CdDriveSerializer extends JsonSerializer<CD> {
+
 	@Override
-	public void serialize(CdDrive cdDrive, JsonGenerator jg,
-			SerializerProvider sp) throws IOException, JsonProcessingException {
+	public void serialize(CD cdDrive, JsonGenerator jg, SerializerProvider sp)
+			throws IOException, JsonProcessingException {
 		if (cdDrive != null) {
 			jg.writeStartObject();
 

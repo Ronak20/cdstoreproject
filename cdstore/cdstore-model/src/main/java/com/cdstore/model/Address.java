@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlTransient;
 
 /*CREATE TABLE Address (
  id 	     INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -95,7 +94,6 @@ public class Address {
 		this.phone = phone;
 	}
 
-	@XmlTransient
 	public List<PurchaseOrder> getPurchaseOrderList() {
 		return purchaseOrderList;
 	}

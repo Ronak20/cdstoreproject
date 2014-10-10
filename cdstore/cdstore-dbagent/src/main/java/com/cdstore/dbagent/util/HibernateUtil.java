@@ -6,12 +6,13 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import com.cdstore.dbagent.model.Address;
-import com.cdstore.dbagent.model.CdDrive;
-import com.cdstore.dbagent.model.PurchaseOrder;
-import com.cdstore.dbagent.model.PurchaseOrderItem;
-import com.cdstore.dbagent.model.PurchaseOrderItemId;
-import com.cdstore.dbagent.model.VisitEvent;
+import com.cdstore.dbagent.DbAgentConstant;
+import com.cdstore.model.Address;
+import com.cdstore.model.CD;
+import com.cdstore.model.PurchaseOrder;
+import com.cdstore.model.PurchaseOrderItem;
+import com.cdstore.model.PurchaseOrderItemId;
+import com.cdstore.model.VisitEvent;
 
 public class HibernateUtil {
 
@@ -20,7 +21,7 @@ public class HibernateUtil {
 	public static SessionFactory getSessionFactory() throws HibernateException {
 		if (sessionFactory == null) {
 			Configuration configuration = new Configuration()
-					.addAnnotatedClass(CdDrive.class)
+					.addAnnotatedClass(CD.class)
 					.addAnnotatedClass(Address.class)
 					.addAnnotatedClass(PurchaseOrder.class)
 					.addAnnotatedClass(PurchaseOrderItem.class)
@@ -30,11 +31,13 @@ public class HibernateUtil {
 							"org.hibernate.dialect.MySQLDialect")
 					.setProperty("hibernate.connection.driver_class",
 							"com.mysql.jdbc.Driver")
-					.setProperty("hibernate.connection.username", "root")
-					.setProperty("hibernate.connection.password", "root")
+					.setProperty("hibernate.connection.username",
+							DbAgentConstant.DB_USERNAME)
+					.setProperty("hibernate.connection.password",
+							DbAgentConstant.DB_PASSWORD)
 					.setProperty("hibernate.connection.pool_size", "1")
 					.setProperty("hibernate.connection.url",
-							"jdbc:mysql://localhost:3306/cdstore")
+							DbAgentConstant.DB_CONNECTION_URL)
 					.setProperty("hibernate.current_session_context_class",
 							"thread")
 					.setProperty("hibernate.format_sql", "true")

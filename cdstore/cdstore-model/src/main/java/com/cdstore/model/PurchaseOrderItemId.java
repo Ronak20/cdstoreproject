@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import java.io.Serializable;
 
@@ -14,7 +14,7 @@ public class PurchaseOrderItemId implements Serializable {
 	private PurchaseOrder purchaseOrder;
 
 	@ManyToOne
-	private CdDrive cdDrive;
+	private CD cdDrive;
 
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
@@ -24,11 +24,11 @@ public class PurchaseOrderItemId implements Serializable {
 		this.purchaseOrder = purchaseOrder;
 	}
 
-	public CdDrive getCdDrive() {
+	public CD getCdDrive() {
 		return cdDrive;
 	}
 
-	public void setCdDrive(CdDrive cdDrive) {
+	public void setCdDrive(CD cdDrive) {
 		this.cdDrive = cdDrive;
 	}
 

@@ -1,4 +1,4 @@
-package com.cdstore.dbagent.model;
+package com.cdstore.model;
 
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
