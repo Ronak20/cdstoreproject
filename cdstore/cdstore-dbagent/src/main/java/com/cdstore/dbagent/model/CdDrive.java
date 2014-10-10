@@ -8,13 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import com.cdstore.dbagent.serializer.CdDriveSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /*DROP TABLE IF EXISTS CD;
  CREATE TABLE CD (
@@ -26,8 +25,8 @@ import org.hibernate.annotations.LazyCollectionOption;
  ) ;*/
 
 @Entity
-@XmlRootElement
 @Table(name = "cd")
+@JsonSerialize(using = CdDriveSerializer.class)
 public class CdDrive {
 
 	@Id
@@ -51,7 +50,6 @@ public class CdDrive {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cdDrive", orphanRemoval = true)
 	List<VisitEvent> visitEventList;
 
-	@XmlElement
 	public String getCdId() {
 		return cdId;
 	}
@@ -60,7 +58,6 @@ public class CdDrive {
 		this.cdId = cdId;
 	}
 
-	@XmlElement
 	public String getTitle() {
 		return title;
 	}
@@ -69,7 +66,6 @@ public class CdDrive {
 		this.title = title;
 	}
 
-	@XmlElement
 	public Integer getPrice() {
 		return price;
 	}
@@ -78,7 +74,6 @@ public class CdDrive {
 		this.price = price;
 	}
 
-	@XmlElement
 	public String getCategory() {
 		return category;
 	}
@@ -87,7 +82,6 @@ public class CdDrive {
 		this.category = category;
 	}
 
-	@XmlTransient//@XmlElementWrapper(name = "purchaseOrderItemList")
 	public List<PurchaseOrderItem> getPurchaseOrderItem() {
 		return purchaseOrderItem;
 	}
@@ -96,7 +90,6 @@ public class CdDrive {
 		this.purchaseOrderItem = purchaseOrderItem;
 	}
 
-	@XmlTransient//@XmlElementWrapper(name = "visitEventList")
 	public List<VisitEvent> getVisitEventList() {
 		return visitEventList;
 	}

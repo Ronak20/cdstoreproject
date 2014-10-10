@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.cdstore.dbagent.model.CdDrive;
 import com.cdstore.restws.endpoint.def.ICdDriveRest;
-import com.cdstore.restws.model.CdDriveJsonModel;
 import com.cdstore.restws.service.CdService;
 import com.cdstore.restws.service.def.ICdService;
 
@@ -23,13 +22,6 @@ public class CdDriveRest implements ICdDriveRest {
 
 	public CdDriveRest() {
 		cdService = new CdService();
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<CdDriveJsonModel> getAll() {
-		List<CdDriveJsonModel> cdDriveList = cdService.getCdDriveList();
-		return cdDriveList;
 	}
 	
 	@GET

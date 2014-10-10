@@ -18,9 +18,7 @@ public class CdStoreResourceConfig extends ResourceConfig {
 	 */
 	public CdStoreResourceConfig() {
 		this.register(RequestContextFilter.class);
-		this.register(TestResource.class);
-		this.register(JAXBContextResolver.class);
-		//this.register(JacksonFeature.class);
+		this.register(JacksonFeature.class);
 		this.register(CdDriveRest.class);
 	}
 }

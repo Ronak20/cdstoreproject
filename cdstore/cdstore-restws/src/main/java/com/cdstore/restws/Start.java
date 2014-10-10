@@ -9,11 +9,9 @@ import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 /**
- * The sample demonstrates how to make Jersey2-Spring integration work on top of
- * Grizzly 2, including static pages served from a folder or from within a jar
- * file.
+ * Jersey2-Spring integration on top of Grizzly 2
  * 
- * @author Janus Dam Nielsen
+ * @author Ronak Chaudhari
  */
 public class Start {
 
@@ -52,8 +50,10 @@ public class Start {
 		servletRegistration
 				.setInitParameter("com.sun.jersey.config.property.packages",
 						"com.cdstore.restws");
-		/*servletRegistration.setInitParameter(
-				"com.sun.jersey.api.json.POJOMappingFeature", "true");*/
+		/*
+		 * servletRegistration.setInitParameter(
+		 * "com.sun.jersey.api.json.POJOMappingFeature", "true");
+		 */
 		servletRegistration.addMapping("/*");
 
 		HttpServer server = new HttpServer();

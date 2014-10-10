@@ -1,22 +1,21 @@
-/*package com.cdstore.restws.serializer;
+package com.cdstore.dbagent.serializer;
 
 import java.io.IOException;
 
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.SerializerProvider;
-
 import com.cdstore.dbagent.model.CdDrive;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
-*//**
- * Serialiazer for cd drive
+/**
+ * Serializer for cd drive
  * 
  * @author Ronak
  *
- *//*
+ */
 public class CdDriveSerializer extends JsonSerializer<CdDrive> {
-
+	
 	@Override
 	public void serialize(CdDrive cdDrive, JsonGenerator jg,
 			SerializerProvider sp) throws IOException, JsonProcessingException {
@@ -33,4 +32,3 @@ public class CdDriveSerializer extends JsonSerializer<CdDrive> {
 	}
 
 }
-*/
