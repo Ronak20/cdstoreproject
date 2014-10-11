@@ -12,6 +12,7 @@ import com.cdstore.model.CD;
 import com.cdstore.model.PurchaseOrder;
 import com.cdstore.model.PurchaseOrderItem;
 import com.cdstore.model.PurchaseOrderItemId;
+import com.cdstore.model.User;
 import com.cdstore.model.VisitEvent;
 
 public class HibernateUtil {
@@ -27,6 +28,7 @@ public class HibernateUtil {
 					.addAnnotatedClass(PurchaseOrderItem.class)
 					.addAnnotatedClass(PurchaseOrderItemId.class)
 					.addAnnotatedClass(VisitEvent.class)
+					.addAnnotatedClass(User.class)
 					.setProperty("hibernate.dialect",
 							"org.hibernate.dialect.MySQLDialect")
 					.setProperty("hibernate.connection.driver_class",

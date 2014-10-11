@@ -14,7 +14,7 @@ public class PurchaseOrderItemId implements Serializable {
 	private PurchaseOrder purchaseOrder;
 
 	@ManyToOne
-	private CD cdDrive;
+	private CD cd;
 
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
@@ -24,19 +24,19 @@ public class PurchaseOrderItemId implements Serializable {
 		this.purchaseOrder = purchaseOrder;
 	}
 
-	public CD getCdDrive() {
-		return cdDrive;
+	public CD getCd() {
+		return cd;
 	}
 
-	public void setCdDrive(CD cdDrive) {
-		this.cdDrive = cdDrive;
+	public void setCd(CD cd) {
+		this.cd = cd;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cdDrive == null) ? 0 : cdDrive.hashCode());
+		result = prime * result + ((cd == null) ? 0 : cd.hashCode());
 		result = prime * result
 				+ ((purchaseOrder == null) ? 0 : purchaseOrder.hashCode());
 		return result;
@@ -51,10 +51,10 @@ public class PurchaseOrderItemId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		PurchaseOrderItemId other = (PurchaseOrderItemId) obj;
-		if (cdDrive == null) {
-			if (other.cdDrive != null)
+		if (cd == null) {
+			if (other.cd != null)
 				return false;
-		} else if (!cdDrive.equals(other.cdDrive))
+		} else if (!cd.equals(other.cd))
 			return false;
 		if (purchaseOrder == null) {
 			if (other.purchaseOrder != null)
@@ -66,8 +66,8 @@ public class PurchaseOrderItemId implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderItemId [purchaseOrder=" + purchaseOrder
-				+ ", cdDrive=" + cdDrive + "]";
+		return "PurchaseOrderItemId [purchaseOrder=" + purchaseOrder + ", cd="
+				+ cd + "]";
 	}
 
 }

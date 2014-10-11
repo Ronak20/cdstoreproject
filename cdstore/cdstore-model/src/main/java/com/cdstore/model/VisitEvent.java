@@ -21,7 +21,7 @@ public class VisitEvent {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cdid", referencedColumnName = "cdid")
-	CD cdDrive;
+	CD cd;
 
 	@Column(name = "eventtype")
 	String eventType;
@@ -42,12 +42,12 @@ public class VisitEvent {
 		this.day = day;
 	}
 
-	public CD getCdDrive() {
-		return cdDrive;
+	public CD getCd() {
+		return cd;
 	}
 
-	public void setCdDrive(CD cdDrive) {
-		this.cdDrive = cdDrive;
+	public void setCd(CD cd) {
+		this.cd = cd;
 	}
 
 	public String getEventType() {
@@ -62,7 +62,7 @@ public class VisitEvent {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cdDrive == null) ? 0 : cdDrive.hashCode());
+		result = prime * result + ((cd == null) ? 0 : cd.hashCode());
 		result = prime * result + ((day == null) ? 0 : day.hashCode());
 		result = prime * result
 				+ ((eventType == null) ? 0 : eventType.hashCode());
@@ -80,10 +80,10 @@ public class VisitEvent {
 		if (getClass() != obj.getClass())
 			return false;
 		VisitEvent other = (VisitEvent) obj;
-		if (cdDrive == null) {
-			if (other.cdDrive != null)
+		if (cd == null) {
+			if (other.cd != null)
 				return false;
-		} else if (!cdDrive.equals(other.cdDrive))
+		} else if (!cd.equals(other.cd))
 			return false;
 		if (day == null) {
 			if (other.day != null)
@@ -106,7 +106,7 @@ public class VisitEvent {
 	@Override
 	public String toString() {
 		return "VisitEvent [visitEventId=" + visitEventId + ", day=" + day
-				+ ", cdDrive=" + cdDrive + ", eventType=" + eventType + "]";
+				+ ", cd=" + cd + ", eventType=" + eventType + "]";
 	}
 
 }

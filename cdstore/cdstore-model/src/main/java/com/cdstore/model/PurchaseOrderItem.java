@@ -8,22 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-/*CREATE TABLE POItem (
- id       INT UNSIGNED NOT NULL,
- cdid     VARCHAR(20) NOT NULL,
- price    INT UNSIGNED NOT NULL,
- PRIMARY KEY(id,cdid),
- INDEX (id),
- FOREIGN KEY(id) REFERENCES PO(id) ON DELETE CASCADE,
- INDEX (cdid),
- FOREIGN KEY(cdid) REFERENCES CD(cdid) ON DELETE CASCADE
- ) ;*/
-
 @Entity
 @Table(name = "poitem")
 @AssociationOverrides({
-		@AssociationOverride(name = "poId.purchaseOrder", joinColumns = @JoinColumn(name = "id")),
-		@AssociationOverride(name = "poId.cdDrive", joinColumns = @JoinColumn(name = "cdid")) })
+		@AssociationOverride(name = "poId.purchaseOrder", joinColumns = @JoinColumn(name = "poid")),
+		@AssociationOverride(name = "poId.cd", joinColumns = @JoinColumn(name = "cdid")) })
 public class PurchaseOrderItem {
 
 	@EmbeddedId

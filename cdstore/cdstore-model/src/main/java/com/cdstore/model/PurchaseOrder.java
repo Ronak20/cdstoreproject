@@ -12,37 +12,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*CREATE TABLE PO (
- id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
- lname     VARCHAR(20) NOT NULL,
- fname     VARCHAR(20) NOT NULL,
- status    ENUM('ORDERED','PROCESSED','DENIED') NOT NULL,
- address   INT UNSIGNED NOT NULL,
- PRIMARY KEY(id),
- INDEX (address),
- FOREIGN KEY (address) REFERENCES Address (id) ON DELETE CASCADE
- ) ;*/
-
 @Entity
 @Table(name = "po")
 public class PurchaseOrder {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "poid")
 	String purchaseOrderId;
-
-	@Column(name = "lname")
-	String lastName;
-
-	@Column(name = "fname")
-	String firstName;
 
 	@Column(name = "status")
 	String status;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address", referencedColumnName = "id")
-	Address address;
+	@JoinColumn(name = "user", referencedColumnName = "userid")
+	User user;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "poId.purchaseOrder", orphanRemoval = true)
 	List<PurchaseOrderItem> purchaseOrderItem;
@@ -55,22 +38,6 @@ public class PurchaseOrder {
 		this.purchaseOrderId = purchaseOrderId;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -79,12 +46,12 @@ public class PurchaseOrder {
 		this.status = status;
 	}
 
-	public Address getAddress() {
-		return address;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<PurchaseOrderItem> getPurchaseOrderItem() {
@@ -99,11 +66,6 @@ public class PurchaseOrder {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result
 				+ ((purchaseOrderId == null) ? 0 : purchaseOrderId.hashCode());
 		result = prime
@@ -111,6 +73,7 @@ public class PurchaseOrder {
 				+ ((purchaseOrderItem == null) ? 0 : purchaseOrderItem
 						.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -123,21 +86,6 @@ public class PurchaseOrder {
 		if (getClass() != obj.getClass())
 			return false;
 		PurchaseOrder other = (PurchaseOrder) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
-			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
-			return false;
 		if (purchaseOrderId == null) {
 			if (other.purchaseOrderId != null)
 				return false;
@@ -153,14 +101,18 @@ public class PurchaseOrder {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "PurchaseOrder [purchaseOrderId=" + purchaseOrderId
-				+ ", lastName=" + lastName + ", firstName=" + firstName
-				+ ", status=" + status + ", address=" + address
+				+ ", status=" + status + ", user=" + user
 				+ ", purchaseOrderItem=" + purchaseOrderItem + "]";
 	}
 

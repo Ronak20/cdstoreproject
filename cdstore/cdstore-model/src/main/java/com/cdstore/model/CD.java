@@ -15,15 +15,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import com.cdstore.model.serializer.CdDriveSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-/*DROP TABLE IF EXISTS CD;
- CREATE TABLE CD (
- cdid      VARCHAR(20) NOT NULL,
- title     VARCHAR(60) NOT NULL,
- price     INT UNSIGNED NOT NULL,
- category  ENUM('COUNTRY','POP','ROCK') NOT NULL,
- PRIMARY KEY(cdid)
- ) ;*/
-
 @Entity
 @Table(name = "cd")
 @JsonSerialize(using = CdDriveSerializer.class)
@@ -42,12 +33,12 @@ public class CD {
 	@Column(name = "category")
 	private String category;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(mappedBy = "poId.cdDrive", cascade = CascadeType.ALL)
+	//@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "poId.cd", cascade = CascadeType.ALL)
 	List<PurchaseOrderItem> purchaseOrderItem;
 
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cdDrive", orphanRemoval = true)
+	//@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cd", orphanRemoval = true)
 	List<VisitEvent> visitEventList;
 
 	public String getCdId() {
@@ -160,8 +151,8 @@ public class CD {
 
 	@Override
 	public String toString() {
-		return "CdDrive [cdId=" + cdId + ", title=" + title + ", price="
-				+ price + ", category=" + category + ", purchaseOrderItem="
+		return "CD [cdId=" + cdId + ", title=" + title + ", price=" + price
+				+ ", category=" + category + ", purchaseOrderItem="
 				+ purchaseOrderItem + ", visitEventList=" + visitEventList
 				+ "]";
 	}

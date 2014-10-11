@@ -16,15 +16,15 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 public class CdDriveSerializer extends JsonSerializer<CD> {
 
 	@Override
-	public void serialize(CD cdDrive, JsonGenerator jg, SerializerProvider sp)
+	public void serialize(CD cd, JsonGenerator jg, SerializerProvider sp)
 			throws IOException, JsonProcessingException {
-		if (cdDrive != null) {
+		if (cd != null) {
 			jg.writeStartObject();
 
-			jg.writeStringField("cdId", cdDrive.getCdId());
-			jg.writeStringField("title", cdDrive.getTitle());
-			jg.writeNumberField("price", cdDrive.getPrice());
-			jg.writeStringField("category", cdDrive.getCategory());
+			jg.writeStringField("cdId", cd.getCdId());
+			jg.writeStringField("title", cd.getTitle());
+			jg.writeNumberField("price", cd.getPrice());
+			jg.writeStringField("category", cd.getCategory());
 
 			jg.writeEndObject();
 		}

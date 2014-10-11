@@ -10,22 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/*CREATE TABLE Address (
- id 	     INT UNSIGNED NOT NULL AUTO_INCREMENT,
- street    VARCHAR(100) NOT NULL,
- province  VARCHAR(20)  NOT NULL,
- country   VARCHAR(20)  NOT NULL,
- zip       VARCHAR(20)  NOT NULL,
- phone     VARCHAR(20),
- PRIMARY KEY(id)
- ) ;*/
-
 @Entity
 @Table(name = "address")
 public class Address {
 
 	@Id
-	@Column(name = "id")
+	@Column(name = "addressid")
 	private String addressId;
 
 	@Column(name = "street")
@@ -44,7 +34,7 @@ public class Address {
 	private String phone;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "address", orphanRemoval = true)
-	List<PurchaseOrder> purchaseOrderList;
+	List<User> userList;
 
 	public String getAddressId() {
 		return addressId;
@@ -94,12 +84,12 @@ public class Address {
 		this.phone = phone;
 	}
 
-	public List<PurchaseOrder> getPurchaseOrderList() {
-		return purchaseOrderList;
+	public List<User> getUserList() {
+		return userList;
 	}
 
-	public void setPurchaseOrderList(List<PurchaseOrder> purchaseOrderList) {
-		this.purchaseOrderList = purchaseOrderList;
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 
 	@Override
@@ -112,11 +102,9 @@ public class Address {
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result
 				+ ((province == null) ? 0 : province.hashCode());
-		result = prime
-				* result
-				+ ((purchaseOrderList == null) ? 0 : purchaseOrderList
-						.hashCode());
 		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result
+				+ ((userList == null) ? 0 : userList.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
 		return result;
 	}
@@ -150,15 +138,15 @@ public class Address {
 				return false;
 		} else if (!province.equals(other.province))
 			return false;
-		if (purchaseOrderList == null) {
-			if (other.purchaseOrderList != null)
-				return false;
-		} else if (!purchaseOrderList.equals(other.purchaseOrderList))
-			return false;
 		if (street == null) {
 			if (other.street != null)
 				return false;
 		} else if (!street.equals(other.street))
+			return false;
+		if (userList == null) {
+			if (other.userList != null)
+				return false;
+		} else if (!userList.equals(other.userList))
 			return false;
 		if (zip == null) {
 			if (other.zip != null)
@@ -172,8 +160,7 @@ public class Address {
 	public String toString() {
 		return "Address [addressId=" + addressId + ", street=" + street
 				+ ", province=" + province + ", country=" + country + ", zip="
-				+ zip + ", phone=" + phone + ", purchaseOrderList="
-				+ purchaseOrderList + "]";
+				+ zip + ", phone=" + phone + ", userList=" + userList + "]";
 	}
 
 }
