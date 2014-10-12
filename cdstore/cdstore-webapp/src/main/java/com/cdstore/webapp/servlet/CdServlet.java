@@ -46,7 +46,7 @@ public class CdServlet extends HttpServlet {
 
 		List<CD> cdDriveList = iCdService.getAll();
 		request.setAttribute("cdDriveList", cdDriveList);
-		this.getServletContext().getRequestDispatcher("/index.jsp")
+		this.getServletContext().getRequestDispatcher("/cd.jsp")
 				.include(request, response);
 	}
 
