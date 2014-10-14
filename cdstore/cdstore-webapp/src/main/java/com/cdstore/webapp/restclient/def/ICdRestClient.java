@@ -6,4 +6,5 @@ import com.cdstore.model.CD;
 
 public interface ICdRestClient {
 	List<CD> getAll();
+	List<String> getCdCategories();
 }

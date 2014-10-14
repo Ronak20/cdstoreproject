@@ -39,4 +39,17 @@ public class CdRestClient implements ICdRestClient {
 		});
 		return response;
 	}
+	
+	/*
+	 * @author Sandarbh
+	 * Method to get the existing CD categories from web service
+	 */
+	public List<String> getCdCategories() {
+		WebTarget webTarget = this.webTarget.path("cddrive").path("/cdCategories");
+		Invocation.Builder invocationBuilder = webTarget
+				.request(MediaType.APPLICATION_JSON);
+		List<String> response = invocationBuilder.get(new GenericType<List<String>>() {
+		});
+		return response;
+	}
 }
