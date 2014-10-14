@@ -5,6 +5,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
 import com.cdstore.restws.endpoint.CdRest;
+import com.cdstore.restws.endpoint.UserRest;
 
 /**
  * 
@@ -20,5 +21,6 @@ public class CdStoreResourceConfig extends ResourceConfig {
 		this.register(RequestContextFilter.class);
 		this.register(JacksonFeature.class);
 		this.register(CdRest.class);
+		this.register(UserRest.class);
 	}
 }

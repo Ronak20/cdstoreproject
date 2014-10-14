@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "userid")
 	private String userId;
 
@@ -36,7 +39,7 @@ public class User {
 	private String password;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "address", referencedColumnName = "addressid")
+	@JoinColumn(name = "addressid", referencedColumnName = "addressid")
 	private Address address;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
