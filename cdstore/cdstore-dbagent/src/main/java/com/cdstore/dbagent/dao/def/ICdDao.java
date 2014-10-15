@@ -1,6 +1,7 @@
 package com.cdstore.dbagent.dao.def;
 
 import java.util.List;
+import java.util.Map;
 
 import com.cdstore.model.CD;
 
@@ -12,4 +13,10 @@ public interface ICdDao {
 	 * @return
 	 */
 	List<CD> getAllCD();
+
+	List<String> getCdCategories();
+
+	List<CD> getCdsForACategory(List<String> categoryNames);
+
+	Map<String, List<CD>> getCdMap();
 }
