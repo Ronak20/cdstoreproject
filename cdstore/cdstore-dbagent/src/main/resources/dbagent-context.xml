@@ -48,5 +48,8 @@
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 	<bean id="cdDao" class="com.cdstore.dbagent.dao.CdDao"></bean>
+	<bean id="purchaseOrderDao" class="com.cdstore.dbagent.dao.PurchaseOrderDao"></bean>
+	<bean id="purchaseOrderItemDao" class="com.cdstore.dbagent.dao.PurchaseOrderItemDao"></bean>
+	<bean id="userDao" class="com.cdstore.dbagent.dao.UserDao"></bean>
 
 </beans>
