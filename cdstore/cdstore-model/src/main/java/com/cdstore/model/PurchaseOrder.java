@@ -6,6 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,6 +19,7 @@ import javax.persistence.Table;
 public class PurchaseOrder {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "poid")
 	String purchaseOrderId;
 
@@ -24,7 +27,7 @@ public class PurchaseOrder {
 	String status;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user", referencedColumnName = "userid")
+	@JoinColumn(name = "userid", referencedColumnName = "userid")
 	User user;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "poId.purchaseOrder", orphanRemoval = true)

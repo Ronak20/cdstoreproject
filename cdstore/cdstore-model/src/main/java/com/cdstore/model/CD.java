@@ -33,11 +33,11 @@ public class CD {
 	@Column(name = "category")
 	private String category;
 
-	//@LazyCollection(LazyCollectionOption.FALSE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "poId.cd", cascade = CascadeType.ALL)
 	List<PurchaseOrderItem> purchaseOrderItem;
 
-	//@LazyCollection(LazyCollectionOption.FALSE)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "cd", orphanRemoval = true)
 	List<VisitEvent> visitEventList;
 

@@ -9,21 +9,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cdstore.model.CD;
 import com.cdstore.restws.endpoint.def.ICdRest;
-import com.cdstore.restws.service.CdService;
 import com.cdstore.restws.service.def.ICdService;
 
 @Component
 @Path("/cddrive")
 public class CdRest implements ICdRest {
 
+	@Autowired
 	private ICdService cdService;
+	
+	public ICdService getCdService() {
+		return cdService;
+	}
 
-	public CdRest() {
-		cdService = new CdService();
+	public void setCdService(ICdService cdService) {
+		this.cdService = cdService;
 	}
 
 	@GET
