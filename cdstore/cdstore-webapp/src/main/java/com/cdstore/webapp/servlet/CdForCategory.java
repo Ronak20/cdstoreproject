@@ -18,7 +18,7 @@ import com.cdstore.webapp.service.def.ICdService;
  * Servlet implementation class CDForCategory
  */
 @WebServlet("/cdsForCategories")
-public class CDForCategory extends HttpServlet {
+public class CdForCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ICdService iCdService;
 
@@ -30,7 +30,7 @@ public class CDForCategory extends HttpServlet {
 		this.iCdService = iCdService;
 	}
 
-	public CDForCategory() {
+	public CdForCategory() {
 		setiCdService(new CdService());
 	}
 

@@ -27,6 +27,10 @@ public class CdService implements ICdService {
 		List<CD> cdDriveList = iCdRestClient.getAll();
 		return cdDriveList;
 	}
+	
+	public List<String> getAllCDCategories() {		
+		return iCdRestClient.getAllCDCategories();
+	}
 
 	public List<CD> getAllCDsForCategory(String categoryStrings) {
 		return iCdRestClient.getAllCDsForCategory(categoryStrings);

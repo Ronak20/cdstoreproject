@@ -6,6 +6,6 @@ import com.cdstore.model.CD;
 
 public interface ICdService {
 	List<CD> getAll();
-
+	List<String> getAllCDCategories();
 	List<CD> getAllCDsForCategory(String categoryStrings);
 }
