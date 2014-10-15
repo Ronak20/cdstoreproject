@@ -1,6 +1,7 @@
 package com.cdstore.webapp.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,12 +15,11 @@ import com.cdstore.webapp.service.CdService;
 import com.cdstore.webapp.service.def.ICdService;
 
 /**
- * Servlet implementation class CDShowServlet
+ * Servlet implementation class CDForCategory
  */
-@WebServlet("/CdShowServlet")
-public class CDShowServlet extends HttpServlet {
+@WebServlet("/cdsForCategories")
+public class CDForCategory extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private ICdService iCdService;
 
 	public ICdService getiCdService() {
@@ -30,7 +30,7 @@ public class CDShowServlet extends HttpServlet {
 		this.iCdService = iCdService;
 	}
 
-	public CDShowServlet() {
+	public CDForCategory() {
 		setiCdService(new CdService());
 	}
 
@@ -40,21 +40,16 @@ public class CDShowServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<CD> cdDriveList = iCdService.getAll();
-		request.setAttribute("cdDriveList", cdDriveList);
+		String categorieString = request.getParameter("category");
+		List<CD> cdListForCategory = iCdService
+				.getAllCDsForCategory(categorieString);
 		List<String> categories = iCdService.getAllCDCategories();
+		request.setAttribute("cdForCategoryList", cdListForCategory);
 		request.setAttribute("categories", categories);
-		this.getServletContext().getRequestDispatcher("/cdShow.jsp")
+		request.setAttribute("selectedCategory",
+				request.getParameter("category"));
+		this.getServletContext().getRequestDispatcher("/cdForACategory.jsp")
 				.include(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }

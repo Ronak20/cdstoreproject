@@ -7,7 +7,10 @@ import com.cdstore.model.CD;
 
 public interface ICdRest {
 	List<CD> getAllCD();
+
 	List<String> getAllCDCategories();
-	List<CD> getAllCDsForCategories(List<String> categoryStrings);
+
+	List<CD> getAllCDsForCategory(String categoryString);
+
 	Map<String, List<CD>> getCDMap();
 }

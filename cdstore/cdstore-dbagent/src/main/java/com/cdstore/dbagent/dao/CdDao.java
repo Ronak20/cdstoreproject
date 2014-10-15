@@ -61,11 +61,11 @@ public class CdDao implements ICdDao {
 	 * database.
 	 */
 	@Transactional
-	public List<CD> getCdsForACategory(List<String> categoryNames) {
+	public List<CD> getCdsForACategory(String categoryName) {
 		try {
 			String hql = "FROM CD C WHERE C.category in (:categories)";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
-			query.setParameterList("categories", categoryNames);
+			query.setParameter("categories", categoryName);
 			return ((List<CD>) query.list());
 		} catch (Exception e) {
 			e.printStackTrace();

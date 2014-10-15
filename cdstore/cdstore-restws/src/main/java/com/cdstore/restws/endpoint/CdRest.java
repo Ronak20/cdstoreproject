@@ -22,7 +22,7 @@ public class CdRest implements ICdRest {
 
 	@Autowired
 	private ICdService cdService;
-	
+
 	public ICdService getCdService() {
 		return cdService;
 	}
@@ -38,7 +38,7 @@ public class CdRest implements ICdRest {
 		List<CD> cdDriveList = cdService.getAllCD();
 		return cdDriveList;
 	}
-	
+
 	@GET
 	@Path("/cdCategories")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -46,18 +46,19 @@ public class CdRest implements ICdRest {
 		List<String> cdCategoryList = cdService.getAllCDCategories();
 		return cdCategoryList;
 	}
-	
+
 	@GET
 	@Path("/cdsForCategories")
-	@Produces(MediaType.APPLICATION_JSON)	
-	public List<CD> getAllCDsForCategories(@QueryParam("categories") List<String> categorieStrings) {
-		List<CD> cdList = cdService.getAllCDForCategories(categorieStrings);
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<CD> getAllCDsForCategory(
+			@QueryParam("category") String categorieString) {
+		List<CD> cdList = cdService.getAllCDForCategory(categorieString);
 		return cdList;
 	}
-	
+
 	@GET
 	@Path("/cdMap")
-	@Produces(MediaType.APPLICATION_JSON)	
+	@Produces(MediaType.APPLICATION_JSON)
 	public Map<String, List<CD>> getCDMap() {
 		return cdService.getCDMap();
 	}

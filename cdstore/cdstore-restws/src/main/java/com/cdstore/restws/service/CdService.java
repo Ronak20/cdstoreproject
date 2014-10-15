@@ -42,8 +42,8 @@ public class CdService implements ICdService {
 	 * com.cdstore.restws.service.def.ICdService#getAllCDForCategories(java.
 	 * util.List)
 	 */
-	public List<CD> getAllCDForCategories(List<String> categories) {
-		return cdDao.getCdsForACategory(categories);
+	public List<CD> getAllCDForCategory(String categoryName) {
+		return cdDao.getCdsForACategory(categoryName);
 	}
 
 	/*
