@@ -1,20 +1,29 @@
 package com.cdstore.dbagent.dao;
 
-import org.hibernate.Session;
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdstore.dbagent.dao.def.IPurchaseOrderItemDao;
 import com.cdstore.model.PurchaseOrderItem;
 
 public class PurchaseOrderItemDao implements IPurchaseOrderItemDao {
 
-	private Session session;
+	@Autowired
+	SessionFactory sessionFactory;
 
-	public PurchaseOrderItemDao(Session session) {
-		this.session = session;
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@Transactional
 	public void save(PurchaseOrderItem purchaseOrderItem) {
-		session.save(purchaseOrderItem);
+		sessionFactory.getCurrentSession().save(purchaseOrderItem);
 	}
 
 }

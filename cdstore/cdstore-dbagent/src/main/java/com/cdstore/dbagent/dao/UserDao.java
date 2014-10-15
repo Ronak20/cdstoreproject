@@ -1,24 +1,29 @@
 package com.cdstore.dbagent.dao;
 
-import javax.security.auth.login.Configuration;
+import javax.transaction.Transactional;
 
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdstore.dbagent.dao.def.IUserDao;
 import com.cdstore.model.User;
 
 public class UserDao implements IUserDao {
-	
-	private Session session;
 
-	public UserDao(Session session) {
-		this.session = session;
+	@Autowired
+	SessionFactory sessionFactory;
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
 	}
 
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
+	@Transactional
 	public void save(User user) {
-		session.save(user);
+		sessionFactory.getCurrentSession().save(user);
 	}
 
 }
