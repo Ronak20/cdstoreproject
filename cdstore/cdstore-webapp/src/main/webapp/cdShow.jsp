@@ -42,28 +42,11 @@
 						<input id="srchFld" type="text" placeholder="I'm looking for ..."
 							class="search-query span5" />
 					</form>
-					<ul class="nav pull-right">
-						<li class="dropdown"><a data-toggle="dropdown"
-							class="dropdown-toggle" href="#">Login <b class="caret"></b></a>
-							<div class="dropdown-menu">
-								<form class="form-horizontal loginFrm">
-									<div class="control-group">
-										<input type="text" class="span2" id="inputEmail"
-											placeholder="Email">
-									</div>
-									<div class="control-group">
-										<input type="password" class="span2" id="inputPassword"
-											placeholder="Password">
-									</div>
-									<div class="control-group">
-										<label class="checkbox"> <input type="checkbox">
-											Remember me
-										</label>
-										<button type="submit" class="btn pull-right">Sign in</button>
-									</div>
-								</form>
-							</div></li>
-					</ul>
+					<!-- <ul class="nav pull-right">						
+						<li><label class="btn-large"> <a
+								href="/product_details.html">Proceed To Check Out</a>
+						</label></li>
+					</ul> -->
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -80,10 +63,9 @@
 					<div class="pull-right">
 						<br /> <a href="product_summary.html"> <span
 							class="btn btn-mini btn-warning"> <i
-								class="icon-shopping-cart icon-white"></i> [ 0 ]
-						</span>
+								class="icon-shopping-cart icon-white"></i>[ Check Out ]</span>
 						</a> <a href="product_summary.html"><span
-							class="btn btn-mini active">$00.00</span></a>
+							class="btn btn-mini active cost">$00.00</span></a>
 					</div>
 				</div>
 			</div>
@@ -101,10 +83,8 @@
 							href="${pageContext.request.contextPath}/cdsForCategories?category=${category}"><c:out
 									value="${category}"></c:out></a></li>
 					</c:forEach>
-					<li><a href="product_summary.html"><strong>0
-								Items in your cart <span class="badge badge-warning pull-right"
-								style="line-height: 18px;">$00.00</span>
-						</strong></a></li>
+					<li> <a href="product_summary.html"><strong><span class= "cartcount" id="cartid">[ 0 ] Items in your cart</span>
+					<span class="badge badge-warning pull-right cost" style="line-height:18px;">$00.00</span></strong></a></li>
 					<li style="border: 0">&nbsp;</li>
 				</ul>
 			</div>
@@ -112,8 +92,9 @@
 			<div class="span9">
 				<div>
 					<h3>All Products</h3>
-					<ul class="thumbnails">
+					<ul class="thumbnails">					
 						<c:forEach var="cd" items="${cdDriveList}">
+						
 							<li class="span3">
 								<div class="thumbnail">
 									<img
@@ -131,9 +112,9 @@
 										</p>
 										<h4>
 											<label class="checkbox"><input type="checkbox"
-												name="addToCartCheckBox"
+												name="addToCartCheckBox" onchange='handleChange(this);'
 												value='<c:out value="${cd.cdId}"></c:out>'> Add to
-												cart</label> <span class="pull-middle">$<c:out
+												cart</label> <span id="${cd.cdId}" class="pull-middle">$<c:out
 													value="${cd.price}"></c:out></span>
 										</h4>
 									</div>
@@ -177,7 +158,7 @@
 				</div>
 			</div>
 			<hr class="soft">
-			<p class="pull-right">&copy; Boot'sshop</p>
+			<p class="pull-right">&copy; Elite Coderz</p>
 		</div>
 	</div>
 	<!-- /container -->
@@ -207,9 +188,32 @@
 	<script src="assets/js/jquery.lightbox-0.5.js"></script>
 	<script src="assets/js/bootsshoptgl.js"></script>
 	<script type="text/javascript">
-    $(function() {
-        $('#gallery a').lightBox();
-    });
-    </script>
+		$(function() {
+			$('#gallery a').lightBox();
+		});
+		
+		function handleChange(cb) {
+			var list = $(".cost:first").html().split("$");
+		    var price = parseFloat(list[1]);
+			var spanid = cb.value;	
+			var costtext = $('#' + spanid).html();
+			var list2 = costtext.split("$");
+			var price2 = parseFloat(list2[1]);	
+			var itemcount = $("#cartid").text();
+			var precounter = parseFloat(itemcount.charAt(2));
+			var counter = parseFloat(itemcount.charAt(2));	
+		  if(cb.checked == true){   
+			price = price2+price;	 	
+			counter++;	
+		  }else{ 
+		   price = price- price2;  
+		   counter--;  
+		  }
+		  itemcount = itemcount.replace("[ "+precounter+" ]", "[ "+counter+" ]");
+			$("#cartid").text(itemcount);
+			$(".cost").text("$"+price);
+			
+		}
+	</script>
 </body>
 </html>
