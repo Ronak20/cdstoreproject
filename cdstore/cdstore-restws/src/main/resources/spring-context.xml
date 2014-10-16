@@ -15,10 +15,10 @@
 	<context:component-scan base-package="com.cdstore" />
 
 	<aop:aspectj-autoproxy>
-		<aop:include name="myLogger" />
+		<aop:include name="restwsLogger" />
 	</aop:aspectj-autoproxy>
 
-	<bean id="myLogger" class="com.cdstore.restws.CdStoreRestWSLogger" />
+	<bean id="restwsLogger" class="com.cdstore.restws.CdStoreRestWSLogger" />
 
 	<import resource="classpath:dbagent-context.xml" />
 
@@ -27,6 +27,7 @@
 	<!-- <bean id="purchaseOrderItemService" class="com.cdstore.restws.service.PurchaseOrderItemService"></bean>
 	 -->
 	<bean id="userService" class="com.cdstore.restws.service.UserService"></bean>
+	<bean id="addressService" class="com.cdstore.restws.service.AddressService"></bean>
 
 	<!-- <bean id="cdDao" class="com.cdstore.dbagent.dao.CdDao"></bean> <bean 
 		id="cdService" class="com.cdstore.restws.service.CdService"></bean> -->

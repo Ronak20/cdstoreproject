@@ -6,11 +6,10 @@ import com.cdstore.webapp.restclient.def.IUserRestClient;
 import com.cdstore.webapp.service.def.IUserService;
 
 public class UserService implements IUserService {
-	
+
 	private IUserRestClient userRestClient;
-	
-	public UserService()
-	{
+
+	public UserService() {
 		setUserRestClient(new UserRestClient());
 	}
 
@@ -23,7 +22,11 @@ public class UserService implements IUserService {
 	}
 
 	public void save(User user) {
-		
+		userRestClient.save(user);
+	}
+
+	public User authenticate(User user) {
+		return userRestClient.authenticate(user);
 	}
 
 }

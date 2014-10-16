@@ -32,6 +32,7 @@ public class UserRestClient implements IUserRestClient {
 	}
 
 	public void save(User user) {
+		System.out.println(" save ");
 		WebTarget webTarget = this.webTarget.path("user");
 		Invocation.Builder invocationBuilder = webTarget
 				.request(MediaType.APPLICATION_JSON);
@@ -41,12 +42,42 @@ public class UserRestClient implements IUserRestClient {
 
 		try {
 			userJson = objectMapper.writeValueAsString(user);
+			System.out.println(" userJson :  " + userJson);
 			Response response = webTarget.request().post(
 					Entity.entity(userJson, MediaType.APPLICATION_JSON));
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(" save ");
+	}
+
+	public User authenticate(User user) {
+		System.out.println(" authenticate ");
+		System.out.println(" user :  " + user.toString());
+		WebTarget webTarget = this.webTarget.path("user").path("/authenticate");
+		Invocation.Builder invocationBuilder = webTarget
+				.request(MediaType.APPLICATION_JSON);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String userJson;
+
+		try {
+			userJson = objectMapper.writeValueAsString(user);
+			System.out.println(" userJson :  " + userJson);
+			Response response = webTarget.request().post(
+					Entity.entity(userJson, MediaType.APPLICATION_JSON));
+
+			User authenticatedUser = response.readEntity(User.class);
+			System.out.println(" authenticatedUser :  "
+					+ authenticatedUser.toString());
+			return authenticatedUser;
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(" authenticate ");
+		return null;
 
 	}
 

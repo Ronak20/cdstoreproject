@@ -42,7 +42,7 @@ public class CDShowServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<CD> cdDriveList = iCdService.getAll();
 		request.setAttribute("cdDriveList", cdDriveList);
-		List<String> categories = iCdService.getAllCDCategories();
+		List<String> categories = null;//iCdService.getAllCDCategories();
 		request.setAttribute("categories", categories);
 		this.getServletContext().getRequestDispatcher("/cdShow.jsp")
 				.include(request, response);

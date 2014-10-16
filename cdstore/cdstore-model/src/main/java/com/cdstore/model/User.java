@@ -17,8 +17,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.cdstore.model.serializer.UserSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 @Entity
 @Table(name = "user")
+@JsonSerialize(using = UserSerializer.class)
 public class User {
 
 	@Id

@@ -1,8 +1,12 @@
 package com.cdstore.dbagent.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdstore.dbagent.dao.def.IUserDao;
@@ -26,4 +30,14 @@ public class UserDao implements IUserDao {
 		sessionFactory.getCurrentSession().save(user);
 	}
 
+	@Transactional
+	public List<User> getUser(String userName, String password) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("username", userName));
+		criteria.add(Restrictions.eq("password", password));
+
+		List<User> userList = criteria.list();
+		return userList;
+	}
 }

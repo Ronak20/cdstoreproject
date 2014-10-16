@@ -15,10 +15,10 @@
 	<tx:annotation-driven />
 
 	<aop:aspectj-autoproxy>
-		<aop:include name="myLogger" />
+		<aop:include name="dbAgentLogger" />
 	</aop:aspectj-autoproxy>
 
-	<bean id="myLogger" class="com.cdstore.dbagent.CdStoreDbAgentLogger" />
+	<bean id="dbAgentLogger" class="com.cdstore.dbagent.CdStoreDbAgentLogger" />
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -51,5 +51,6 @@
 	<bean id="purchaseOrderDao" class="com.cdstore.dbagent.dao.PurchaseOrderDao"></bean>
 	<bean id="purchaseOrderItemDao" class="com.cdstore.dbagent.dao.PurchaseOrderItemDao"></bean>
 	<bean id="userDao" class="com.cdstore.dbagent.dao.UserDao"></bean>
+	<bean id="addressDao" class="com.cdstore.dbagent.dao.AddressDao"></bean>
 
 </beans>

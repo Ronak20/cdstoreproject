@@ -1,5 +1,7 @@
 package com.cdstore.restws.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cdstore.dbagent.dao.def.IUserDao;
@@ -21,6 +23,23 @@ public class UserService implements IUserService {
 
 	public void save(User user) {
 		userDao.save(user);
+	}
+
+	public User authenticate(User user) {
+
+		String userName = user.getUsername();
+		String password = user.getPassword();
+
+		if (userName != null && !userName.isEmpty() && password != null
+				&& !password.isEmpty()) {
+			List<User> userList = userDao.getUser(userName, password);
+			if (userList != null) {
+				User dbUser = userList.get(0);
+				return dbUser;
+			}
+		}
+
+		return null;
 	}
 
 }
