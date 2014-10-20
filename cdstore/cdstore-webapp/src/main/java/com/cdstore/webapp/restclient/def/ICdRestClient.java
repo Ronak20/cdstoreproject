@@ -10,4 +10,6 @@ public interface ICdRestClient {
 	List<String> getAllCDCategories();
 
 	List<CD> getAllCDsForCategory(String categoryString);
+	
+	List<CD> getCds(List<String> cdIds);
 }

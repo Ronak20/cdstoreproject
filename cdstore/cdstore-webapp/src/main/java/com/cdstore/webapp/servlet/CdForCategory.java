@@ -40,6 +40,20 @@ public class CdForCategory extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Integer totalPrice=0; //the total price that should show up in shopping cart. We will update in later according to the request received.
+		Integer cartItems = 0; //Total number of items in cart, We will update this later in the code.
+		ArrayList<String>interimObj =(ArrayList<String>) request.getSession().getAttribute("selectedcds");
+		if(interimObj !=null){
+			List<CD> selectedCds = iCdService.getCds(interimObj);
+			//calculate the price 
+			for (CD cd : selectedCds) {
+				totalPrice = totalPrice+cd.getPrice();
+			}
+			cartItems = selectedCds.size();
+			request.getSession().setAttribute("nocdselected","false" );	//set this to false so that user doesn't see warning message.
+		}
+		request.setAttribute("totalPrice", totalPrice);
+		request.setAttribute("cartItems", cartItems);
 		String categorieString = request.getParameter("category");
 		List<CD> cdListForCategory = iCdService
 				.getAllCDsForCategory(categorieString);

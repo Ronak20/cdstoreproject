@@ -6,23 +6,29 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.cdstore.model.PurchaseOrder;
 import com.cdstore.restws.endpoint.def.IPurchaseOrderRest;
-import com.cdstore.restws.service.PurchaseOrderService;
 import com.cdstore.restws.service.def.IPurchaseOrderService;
 
 @Component
 @Path("/purchase")
 public class PurchaseOrderRest implements IPurchaseOrderRest {
 
+	@Autowired
 	private IPurchaseOrderService iPurchaseOrderService;
-	private static int PURCHASE_COUNT = 0;
-
-	public PurchaseOrderRest() {
-		iPurchaseOrderService = new PurchaseOrderService();
+	
+	public IPurchaseOrderService getiPurchaseOrderService() {
+		return iPurchaseOrderService;
 	}
+
+	public void setiPurchaseOrderService(IPurchaseOrderService iPurchaseOrderService) {
+		this.iPurchaseOrderService = iPurchaseOrderService;
+	}
+
+	private static int PURCHASE_COUNT = 0;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

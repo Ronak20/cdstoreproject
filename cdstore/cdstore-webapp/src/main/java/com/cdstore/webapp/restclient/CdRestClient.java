@@ -71,4 +71,17 @@ public class CdRestClient implements ICdRestClient {
 		});
 		return response;
 	}
+
+	public List<CD> getCds(List<String> cdIds) {
+		WebTarget webTarget = this.webTarget.path("cddrive").path(
+				"cdIds");
+		WebTarget webTargetWithQueryParam = webTarget.queryParam("cdIds",
+				cdIds);
+		Invocation.Builder invocationBuilder = webTargetWithQueryParam
+				.request(MediaType.APPLICATION_JSON);
+		List<CD> response = invocationBuilder.get(new GenericType<List<CD>>() {
+		});
+		return response;
+		
+	}
 }

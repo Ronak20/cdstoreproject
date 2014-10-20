@@ -66,6 +66,6 @@ public class RegisterServlet extends HttpServlet {
 		
 		userService.save(user);
 
-		resp.sendRedirect("/login.html");
+		resp.sendRedirect("/cdstore-webapp/login.html");
 	}
 }

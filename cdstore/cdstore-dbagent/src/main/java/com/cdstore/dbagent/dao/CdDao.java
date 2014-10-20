@@ -100,5 +100,27 @@ public class CdDao implements ICdDao {
 		}
 
 	}
+	
+	/**
+	 * @author Sandarbh
+	 * @param cdId the cdId of the CD that needs to be fetched
+	 * @return
+	 */
+	@Transactional
+	public List<CD> getCds(List<String> cdIds){
+		try {
+			String hql = "FROM CD C WHERE C.cdId in (:Ids)";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			String replaced = cdIds.get(0).replace("[", "").replace("]", "");
+			String[] replacedsubString= replaced.split(",\\s");			
+			query.setParameterList("Ids", replacedsubString);
+			List<CD> cdDriveSelectedList = query.list();
+			return cdDriveSelectedList;			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 }

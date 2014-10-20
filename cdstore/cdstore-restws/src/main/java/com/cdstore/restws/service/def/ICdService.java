@@ -16,4 +16,6 @@ public interface ICdService {
 
 	// Method to retrieve cds according to their categories
 	Map<String, List<CD>> getCDMap();
+	
+	List<CD> getCds(List<String> cdIds);
 }

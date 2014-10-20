@@ -36,18 +36,19 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 	}
 
 	public void save(PurchaseOrder purchaseOrder) {
-		purchaseOrderDao.save(purchaseOrder);
-
 		List<PurchaseOrderItem> purchaseOrderItemList = purchaseOrder
 				.getPurchaseOrderItem();
-
+		
+		purchaseOrder.setPurchaseOrderItem(null);
+		purchaseOrderDao.save(purchaseOrder);
+		
+		
 		if (purchaseOrderItemList != null) {
 
 			for (PurchaseOrderItem purchaseOrderItem : purchaseOrderItemList) {
 				PurchaseOrderItemId poId = purchaseOrderItem.getPoId();
 				poId.setPurchaseOrder(purchaseOrder);
 				purchaseOrderItem.setPoId(poId);
-
 				purchaseOrderItemDao.save(purchaseOrderItem);
 			}
 

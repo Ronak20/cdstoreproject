@@ -69,9 +69,13 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			request.setAttribute("message", "Invalid username or password");
 		}
-
-		this.getServletContext().getRequestDispatcher("/cd.jsp")
-				.forward(request, response);
+		if(request.getSession().getAttribute("selectedcds") != null)
+			response.sendRedirect("/cdstore-webapp/confirmOrder");
+		else {
+			response.sendRedirect("/cdstore-webapp/CdShowServlet");
+			
+		}
+		
 	}
 
 }

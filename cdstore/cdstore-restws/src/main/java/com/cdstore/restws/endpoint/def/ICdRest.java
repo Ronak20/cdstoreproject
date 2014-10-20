@@ -13,4 +13,6 @@ public interface ICdRest {
 	List<CD> getAllCDsForCategory(String categoryString);
 
 	Map<String, List<CD>> getCDMap();
+	
+	List<CD> getCds(List<String> cdIds);
 }

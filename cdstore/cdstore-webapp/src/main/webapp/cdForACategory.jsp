@@ -35,19 +35,9 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="/cdstore-webapp/CdShowServlet">Home</a></li>
-						<li class=""><a href="special_offer.html">Specials Offer</a></li>
-						<li class=""><a href="normal.html">Delivery</a></li>
+						<li class=""><a href="normal.html">Account</a></li>
 						<li class=""><a href="contact.html">Contact</a></li>
 					</ul>
-					<form action="#" class="navbar-search pull-left">
-						<input id="srchFld" type="text" placeholder="I'm looking for ..."
-							class="search-query span5" />
-					</form>
-					<!-- <ul class="nav pull-right">
-						<li><label class="btn-large"> <a
-								href="/product_details.html">Proceed To Check Out</a>
-						</label></li>
-					</ul> -->
 				</div>
 				<!-- /.nav-collapse -->
 			</div>
@@ -55,23 +45,27 @@
 		<!-- /navbar-inner -->
 	</div>
 	<!-- ======================================================================================================================== -->
+	<form method="post" name="cdForm" action="/cdstore-webapp/checkout" >
 	<div id="mainBody" class="container">
-		<header id="header">
+	<header id="header">
 			<div class="row">
 				<div class="span12">
-					<a href="index.html"><img src="assets/img/logo.png"
-						alt="Bootsshop" /></a>
+					<a href="#"><img src="assets/img/logo.png"
+						alt="Elite Coderz CdShop" /></a>
 					<div class="pull-right">
-						<br /> <a href="product_summary.html"> <span
-							class="btn btn-mini btn-warning"> <i
-								class="icon-shopping-cart icon-white"></i>[ Check Out ]</span>
-						</a> <a href="product_summary.html"><span
-							class="btn btn-mini active cost">$00.00</span></a>
+						<br/> <input type="submit" class="badge-warning btn-mini" value="Check Out"> <a href="#"><span
+							class="badge btn btn-mini active cost">$<c:out value="${totalPrice}"></c:out></span></a>
+							<c:choose>
+								<c:when test="${sessionScope.nocdselected =='true'}">
+									<strong><label class="badge-warning btn" id="selectCdWarningLabel">Please select at least one Cd before checking out!</label></strong>
+								</c:when>				
+							</c:choose>
 					</div>
-				</div>
+				</div>		
 			</div>
 			<div class="clr"></div>
 		</header>
+		
 		<!-- ==================================================Header End====================================================================== -->
 		<hr>
 		<div class="row">
@@ -91,8 +85,8 @@
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
-					<li> <a href="product_summary.html"><strong><span class= "cartcount" id="cartid">[ 0 ] Items in your cart</span>
-					<span class="badge badge-warning pull-right cost" style="line-height:18px;">$00.00</span></strong></a></li>
+					<li> <a href="#"><strong><span class= "cartcount" id="cartid">[ <c:out value="${cartItems}"></c:out> ] Items in your cart</span>
+					<span class="badge badge-warning pull-right cost" style="line-height:18px;">$${totalPrice}</span></strong></a></li>
 					<li style="border: 0">&nbsp;</li>
 				</ul>
 			</div>
@@ -119,14 +113,39 @@
 											Category:
 											<c:out value="${cd.category}"></c:out>
 										</h5>
-										</p>
-										<h4>
+										<c:set var="isChecked" value="false"></c:set>
+										<c:forEach var="tickedCdId" items="${sessionScope.selectedcds}">
+										<c:choose>
+							<c:when test="${cd.cdId == tickedCdId}">
+								<c:set var="isChecked" value="true"></c:set>
+							</c:when>
+							
+						</c:choose>
+										</c:forEach>
+										<!-- </p> -->
+										<c:choose>
+							<c:when test="${isChecked == 'true'}">
+								<h4>
+											<h4>
+											<label class="checkbox"><input type="checkbox"
+												name="addToCartCheckBox" onchange='handleChange(this);'
+												value='<c:out value="${cd.cdId}"></c:out>' checked="checked"> Add to
+												cart</label> <span id="${cd.cdId}" class="pull-middle">$<c:out
+													value="${cd.price}"></c:out></span>
+										</h4>
+										</h4>
+							</c:when>
+							<c:otherwise>
+								<h4>
 											<label class="checkbox"><input type="checkbox"
 												name="addToCartCheckBox" onchange='handleChange(this);'
 												value='<c:out value="${cd.cdId}"></c:out>'> Add to
 												cart</label> <span id="${cd.cdId}" class="pull-middle">$<c:out
 													value="${cd.price}"></c:out></span>
 										</h4>
+							</c:otherwise>
+						</c:choose>
+										
 									</div>
 								</div>
 							</li>
@@ -172,7 +191,7 @@
 		</div>
 	</div>
 	<!-- /container -->
-
+</form>
 
 	<!-- Le javascript
     ================================================== -->
@@ -198,31 +217,60 @@
 	<script src="assets/js/jquery.lightbox-0.5.js"></script>
 	<script src="assets/js/bootsshoptgl.js"></script>
 	<script type="text/javascript">
-    $(function() {
-        $('#gallery a').lightBox();
-    });
-    function handleChange(cb) {
-		var list = $(".cost:first").html().split("$");
-	    var price = parseFloat(list[1]);
-		var spanid = cb.value;	
-		var costtext = $('#' + spanid).html();
-		var list2 = costtext.split("$");
-		var price2 = parseFloat(list2[1]);	
-		var itemcount = $("#cartid").text();
-		var precounter = parseFloat(itemcount.charAt(2));
-		var counter = parseFloat(itemcount.charAt(2));	
-	  if(cb.checked == true){   
-		price = price2+price;	 	
-		counter++;	
-	  }else{ 
-	   price = price- price2;  
-	   counter--;  
-	  }
-	  itemcount = itemcount.replace("[ "+precounter+" ]", "[ "+counter+" ]");
-		$("#cartid").text(itemcount);
-		$(".cost").text("$"+price);
-		
-	}
-    </script>
+		$(function() {
+			$('#gallery a').lightBox();
+		})
+
+		function handleChange(cb) {
+			changeShoappingCart(cb);
+			callajax(cb);
+		}
+
+		/*
+		This js method is called whenever any checkedbox is selceted to add the items to shopping cart. It calculates the price for selected cds 
+		and updates the number of items in shopping cart and the totam amount to pay. 
+		On the server side this amount is calculated again just to safeguard against the situations when javascript for browser has been turned off.
+		 */
+		function changeShoappingCart(cb) {
+			var list = $(".cost:first").html().split("$");
+			var price = parseFloat(list[1]);
+			var spanid = cb.value;
+			var costtext = $('#' + spanid).html();
+			var list2 = costtext.split("$");
+			var price2 = parseFloat(list2[1]);
+			var itemcount = $("#cartid").text();
+			var precounter = parseFloat(itemcount.charAt(2));
+			var counter = parseFloat(itemcount.charAt(2));
+			if (cb.checked == true) {
+				price = price2 + price;
+				counter++;
+			} else {
+				price = price - price2;
+				counter--;
+			}
+			itemcount = itemcount.replace("[ " + precounter + " ]", "[ "
+					+ counter + " ]");
+			$("#cartid").text(itemcount);
+			$(".cost").text("$" + price);
+		}
+
+		/*This method is used to asynchronously call the server and modify the content of shopping cart. This call is triggered by checkbox selection or deselction*/
+		function callajax(cb) {
+			alert("pop");
+			var cdId = cb.value;
+			var choice;
+			if (cb.checked == true) {
+				choice = "add";
+			} else {
+				choice = "delete";
+			}
+			$.post("ajaxServlet", {
+				cdString : cdId,
+				action : choice
+			}, function(data) {
+				alert("Data: " + data);
+			})
+		}
+	</script>
 </body>
 </html>

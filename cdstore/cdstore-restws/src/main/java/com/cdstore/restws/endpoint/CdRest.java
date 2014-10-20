@@ -62,5 +62,17 @@ public class CdRest implements ICdRest {
 	public Map<String, List<CD>> getCDMap() {
 		return cdService.getCDMap();
 	}
+	
+	/*
+	 * @author Sandarbh
+	 * 
+	 * returns List of CD for the given list of Ids
+	 */
+	@GET
+	@Path("/cdIds")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<CD> getCds(@QueryParam("cdIds") List<String> cdIds){
+		return cdService.getCds(cdIds);
+	}
 
 }

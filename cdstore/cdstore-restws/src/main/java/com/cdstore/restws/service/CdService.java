@@ -55,4 +55,13 @@ public class CdService implements ICdService {
 	public Map<String, List<CD>> getCDMap() {
 		return cdDao.getCdMap();
 	}
+	
+	/*
+	 * @autjor Sandarbh
+	 * @see com.cdstore.restws.service.def.ICdService#getCd(java.util.List)
+	 * returns List of CD for the given list of Ids
+	 */
+	public List<CD> getCds(List<String> cdIds){
+		return cdDao.getCds(cdIds);
+	}
 }

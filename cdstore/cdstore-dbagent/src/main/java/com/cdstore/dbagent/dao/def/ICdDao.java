@@ -19,4 +19,6 @@ public interface ICdDao {
 	List<CD> getCdsForACategory(String categoryName);
 
 	Map<String, List<CD>> getCdMap();
+	
+	List<CD> getCds(List<String> cdIds);
 }
