@@ -14,6 +14,7 @@ public class PurchaseOrderItemDao implements IPurchaseOrderItemDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	private static Logger logger = LogManager.getLogger(PurchaseOrderItemDao.class);
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -25,7 +26,10 @@ public class PurchaseOrderItemDao implements IPurchaseOrderItemDao {
 
 	@Transactional
 	public void save(PurchaseOrderItem purchaseOrderItem) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "purchaseOrderItem :" + purchaseOrderItem);
 		sessionFactory.getCurrentSession().save(purchaseOrderItem);
+		logger.info(LogConstant.EXITED + "save");
 	}
 
 }

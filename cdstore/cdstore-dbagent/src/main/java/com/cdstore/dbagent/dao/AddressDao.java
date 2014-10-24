@@ -14,6 +14,7 @@ public class AddressDao implements IAddressDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	private static Logger logger = LogManager.getLogger(AddressDao.class);
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -25,8 +26,12 @@ public class AddressDao implements IAddressDao {
 
 	@Transactional
 	public void save(Address address) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "address :" + address);
 		sessionFactory.getCurrentSession().save(address);
 		String addressId = address.getAddressId();
+		logger.info(LogConstant.EXITED + "save");
+
 	}
 
 }

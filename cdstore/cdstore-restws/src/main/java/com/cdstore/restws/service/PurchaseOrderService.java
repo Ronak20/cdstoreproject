@@ -12,6 +12,7 @@ import com.cdstore.model.PurchaseOrderItemId;
 import com.cdstore.restws.service.def.IPurchaseOrderService;
 
 public class PurchaseOrderService implements IPurchaseOrderService {
+	private static Logger logger = LogManager.getLogger(PurchaseOrderService.class);
 
 	@Autowired
 	private IPurchaseOrderDao purchaseOrderDao;
@@ -36,6 +37,8 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 	}
 
 	public void save(PurchaseOrder purchaseOrder) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "purchaseOrder :" + purchaseOrder);
 		List<PurchaseOrderItem> purchaseOrderItemList = purchaseOrder
 				.getPurchaseOrderItem();
 
@@ -52,6 +55,7 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 			}
 
 		}
+		logger.info(LogConstant.EXITED + "save");
 	}
 
 	public List<PurchaseOrder> getPurchaseOrder(String userId) {

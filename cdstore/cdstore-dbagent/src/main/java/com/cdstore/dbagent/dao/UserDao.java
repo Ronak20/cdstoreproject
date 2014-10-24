@@ -18,6 +18,7 @@ public class UserDao implements IUserDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
+	private static Logger logger = LogManager.getLogger(UserDao.class);
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -29,27 +30,40 @@ public class UserDao implements IUserDao {
 
 	@Transactional
 	public void save(User user) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "user :" + user);
 		sessionFactory.getCurrentSession().save(user);
+		logger.info(LogConstant.EXITED + "save");
 	}
 
 	@Transactional
 	public List<User> getUser(String userName, String password) {
+		logger.info(LogConstant.ENTERED + "getUser");
+		logger.info(LogConstant.PARAMETER + "userName :" + userName);
+		logger.info(LogConstant.PARAMETER + "password :" + password);
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				User.class);
 		criteria.add(Restrictions.eq("username", userName));
 		criteria.add(Restrictions.eq("password", password));
 
 		List<User> userList = criteria.list();
+		logger.debug(LogConstant.RETURN + "userList :" + userList);
+		logger.info(LogConstant.EXITED + "getUser");
 		return userList;
 	}
 
 	@Transactional
 	public User getUser(String userId) {
+		logger.info(LogConstant.ENTERED + "getUser");
+		logger.info(LogConstant.PARAMETER + "userId :" + userId);
+		
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
 				User.class);
 		criteria.add(Restrictions.eq("userId", userId));
 
 		User userList = (User) criteria.list().get(0);
+		logger.debug(LogConstant.RETURN + "userList :" + userList);
+		logger.info(LogConstant.EXITED + "getUser");
 		return userList;
 	}
 }

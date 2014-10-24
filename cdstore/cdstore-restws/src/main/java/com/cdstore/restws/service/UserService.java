@@ -10,6 +10,7 @@ import com.cdstore.restws.service.def.IUserService;
 
 public class UserService implements IUserService {
 
+	private static Logger logger = LogManager.getLogger(UserService.class);
 	@Autowired
 	private IUserDao userDao;
 
@@ -26,6 +27,8 @@ public class UserService implements IUserService {
 	}
 
 	public User authenticate(User user) {
+		logger.info(LogConstant.ENTERED + "authenticate");
+		logger.info(LogConstant.PARAMETER + "user :" + user);
 
 		String userName = user.getUsername();
 		String password = user.getPassword();
@@ -38,7 +41,8 @@ public class UserService implements IUserService {
 				return dbUser;
 			}
 		}
-
+		logger.debug(LogConstant.RETURN + "user :" + null);
+		logger.info(LogConstant.EXITED + "authenticate");
 		return null;
 	}
 
