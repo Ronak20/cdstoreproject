@@ -8,14 +8,21 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.AppConstant;
 import com.cdstore.webapp.CdStoreRestClientConfig;
 import com.cdstore.webapp.LogConstant;
 import com.cdstore.webapp.restclient.def.ICdRestClient;
 
+/**
+ * implementation of ICdRestClient
+ * 
+ * @author Ronak Chaudhari
+ *
+ */
 public class CdRestClient implements ICdRestClient {
 
 	private Client restClient;
@@ -24,7 +31,7 @@ public class CdRestClient implements ICdRestClient {
 
 	public CdRestClient() {
 		setRestClient(CdStoreRestClientConfig.getRestClient());
-		webTarget = restClient.target("http://localhost:9090/");
+		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 
 	public Client getRestClient() {

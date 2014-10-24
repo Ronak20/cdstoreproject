@@ -7,20 +7,33 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cdstore.model.PurchaseOrder;
+import com.cdstore.webapp.AppConstant;
 import com.cdstore.webapp.CdStoreRestClientConfig;
+import com.cdstore.webapp.LogConstant;
 import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * implementation of IPurchaseOrderRestClient
+ * 
+ * @author Ronak Chaudhari
+ *
+ */
 public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 
 	private Client restClient;
 	private WebTarget webTarget;
+	private static Logger logger = LogManager
+			.getLogger(PurchaseOrderRestClient.class);
 
 	public PurchaseOrderRestClient() {
 		setRestClient(CdStoreRestClientConfig.getRestClient());
-		webTarget = restClient.target("http://localhost:9090/");
+		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 
 	public Client getRestClient() {
@@ -32,26 +45,29 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 	}
 
 	public String purchase(PurchaseOrder purchaseOrder) {
-		System.out.println(" saving purchase order: " + purchaseOrder.getPurchaseOrderId());
-		WebTarget webTarget = this.webTarget.path("purchase");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		logger.info(LogConstant.ENTERED + "purchase");
+		logger.info(LogConstant.PARAMETER + "purchaseOrder :" + purchaseOrder);
+		Invocation.Builder invocationBuilder = webTarget
+				.request(MediaType.APPLICATION_JSON);
 
 		ObjectMapper objectMapper = new ObjectMapper();
 		String poJson;
 
 		try {
 			poJson = objectMapper.writeValueAsString(purchaseOrder);
-			System.out.println(" poJson :  " + poJson);
-			Response response = webTarget.request().post(Entity.entity(poJson, MediaType.APPLICATION_JSON));
-			String responseString = response.readEntity(String.class);
-			System.out.println(" po saved:  " + purchaseOrder.getPurchaseOrderId());
-			return responseString;
+			logger.debug(LogConstant.RETURN + "poJson :" + poJson);
+			Response response = webTarget.request().post(
+					Entity.entity(poJson, MediaType.APPLICATION_JSON));
+			String purchaseStatus = response.readEntity(String.class);
+			System.out.println(" po saved:  "
+					+ purchaseOrder.getPurchaseOrderId());
+			logger.debug(LogConstant.RETURN + "cdList :" + purchaseStatus);
+			logger.info(LogConstant.EXITED + "getAllCDsForCategory");
+			return purchaseStatus;
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "getAllCDsForCategory");
 			return "WebClientException";
 		}
-
 	}
-
 }

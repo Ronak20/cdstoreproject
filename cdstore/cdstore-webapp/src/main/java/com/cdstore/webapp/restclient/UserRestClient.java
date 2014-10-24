@@ -7,20 +7,32 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cdstore.model.User;
+import com.cdstore.webapp.AppConstant;
 import com.cdstore.webapp.CdStoreRestClientConfig;
+import com.cdstore.webapp.LogConstant;
 import com.cdstore.webapp.restclient.def.IUserRestClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * implementation of IUserRestClient
+ * 
+ * @author Ronak Chaudhari
+ *
+ */
 public class UserRestClient implements IUserRestClient {
 
 	private Client restClient;
 	private WebTarget webTarget;
+	private static Logger logger = LogManager.getLogger(UserRestClient.class);
 
 	public UserRestClient() {
 		setRestClient(CdStoreRestClientConfig.getRestClient());
-		webTarget = restClient.target("http://localhost:9090/");
+		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 
 	public Client getRestClient() {
@@ -32,7 +44,8 @@ public class UserRestClient implements IUserRestClient {
 	}
 
 	public void save(User user) {
-		System.out.println(" save ");
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "user :" + user);
 		WebTarget webTarget = this.webTarget.path("user");
 		Invocation.Builder invocationBuilder = webTarget
 				.request(MediaType.APPLICATION_JSON);
@@ -42,19 +55,19 @@ public class UserRestClient implements IUserRestClient {
 
 		try {
 			userJson = objectMapper.writeValueAsString(user);
-			System.out.println(" userJson :  " + userJson);
+			logger.debug("userJson :" + userJson);
 			Response response = webTarget.request().post(
 					Entity.entity(userJson, MediaType.APPLICATION_JSON));
+			logger.info(LogConstant.EXITED + "save");
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "save");
 		}
-		System.out.println(" save ");
 	}
 
 	public User authenticate(User user) {
-		System.out.println(" authenticate ");
-		System.out.println(" user :  " + user.toString());
+		logger.info(LogConstant.ENTERED + "authenticate");
+		logger.info(LogConstant.PARAMETER + "user :" + user);
 		WebTarget webTarget = this.webTarget.path("user").path("/authenticate");
 		Invocation.Builder invocationBuilder = webTarget
 				.request(MediaType.APPLICATION_JSON);
@@ -64,35 +77,38 @@ public class UserRestClient implements IUserRestClient {
 
 		try {
 			userJson = objectMapper.writeValueAsString(user);
-			System.out.println(" userJson :  " + userJson);
+			logger.debug("userJson :" + userJson);
 			Response response = webTarget.request().post(
 					Entity.entity(userJson, MediaType.APPLICATION_JSON));
 
 			User authenticatedUser = response.readEntity(User.class);
-			System.out.println(" authenticatedUser :  "
-					+ authenticatedUser.toString());
+			logger.debug(LogConstant.RETURN + "authenticatedUser :"
+					+ authenticatedUser);
+			logger.info(LogConstant.EXITED + "authenticate");
 			return authenticatedUser;
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "authenticate");
 		}
-		System.out.println(" authenticate ");
+		logger.info(LogConstant.EXITED + "authenticate");
 		return null;
 
 	}
 
 	public User getUser(String userId) {
-		System.out.println(" ========= getUser");
-		System.out.println("userId : " + userId);
+		logger.info(LogConstant.ENTERED + "getUser");
+		logger.info(LogConstant.PARAMETER + "userId :" + userId);
 		WebTarget webTarget = this.webTarget.path("user").path("details");
 		WebTarget webTargetWithQueryParam = webTarget.queryParam("userId",
 				userId);
 		Invocation.Builder invocationBuilder = webTargetWithQueryParam
 				.request();
 		Response response = invocationBuilder.get();
-		User user = response.readEntity(User.class);
-		System.out.println("user : " + user);
-		System.out.println("getUser");
-		return user;
+		User authenticatedUser = response.readEntity(User.class);
+		logger.debug(LogConstant.RETURN + "authenticatedUser :"
+				+ authenticatedUser);
+		logger.info(LogConstant.EXITED + "getUser");
+		return authenticatedUser;
 	}
 
 }
