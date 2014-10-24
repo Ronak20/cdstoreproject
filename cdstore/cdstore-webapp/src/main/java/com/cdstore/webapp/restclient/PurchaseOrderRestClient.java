@@ -17,12 +17,12 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 
 	private Client restClient;
 	private WebTarget webTarget;
-	
-	public PurchaseOrderRestClient(){
+
+	public PurchaseOrderRestClient() {
 		setRestClient(CdStoreRestClientConfig.getRestClient());
 		webTarget = restClient.target("http://localhost:9090/");
 	}
-	
+
 	public Client getRestClient() {
 		return restClient;
 	}
@@ -30,27 +30,27 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 	public void setRestClient(Client restClient) {
 		this.restClient = restClient;
 	}
-	
-	
-	public void purchase(PurchaseOrder purchaseOrder) {
-		System.out.println(" saving purchase order: "+purchaseOrder.getPurchaseOrderId());
+
+	public String purchase(PurchaseOrder purchaseOrder) {
+		System.out.println(" saving purchase order: " + purchaseOrder.getPurchaseOrderId());
 		WebTarget webTarget = this.webTarget.path("purchase");
-		Invocation.Builder invocationBuilder = webTarget
-				.request(MediaType.APPLICATION_JSON);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+
 		ObjectMapper objectMapper = new ObjectMapper();
 		String poJson;
 
 		try {
 			poJson = objectMapper.writeValueAsString(purchaseOrder);
 			System.out.println(" poJson :  " + poJson);
-			Response response = webTarget.request().post(
-					Entity.entity(poJson, MediaType.APPLICATION_JSON));
-			System.out.println(" po saved:  "+ purchaseOrder.getPurchaseOrderId());
+			Response response = webTarget.request().post(Entity.entity(poJson, MediaType.APPLICATION_JSON));
+			String responseString = response.readEntity(String.class);
+			System.out.println(" po saved:  " + purchaseOrder.getPurchaseOrderId());
+			return responseString;
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "WebClientException";
 		}
-		
 
 	}
 

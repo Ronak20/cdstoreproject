@@ -4,5 +4,5 @@ import com.cdstore.model.PurchaseOrder;
 
 public interface IPurchaseOrderRestClient {
 
-	public void purchase(PurchaseOrder purchaseOrder);
+	public String purchase(PurchaseOrder purchaseOrder);
 }

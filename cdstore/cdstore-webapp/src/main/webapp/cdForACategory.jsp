@@ -242,6 +242,7 @@
 			var precounter = parseFloat(itemcount.charAt(2));
 			var counter = parseFloat(itemcount.charAt(2));
 			if (cb.checked == true) {
+				 $("#selectCdWarningLabel").hide();
 				price = price2 + price;
 				counter++;
 			} else {
@@ -256,7 +257,6 @@
 
 		/*This method is used to asynchronously call the server and modify the content of shopping cart. This call is triggered by checkbox selection or deselction*/
 		function callajax(cb) {
-			alert("pop");
 			var cdId = cb.value;
 			var choice;
 			if (cb.checked == true) {
@@ -267,8 +267,6 @@
 			$.post("ajaxServlet", {
 				cdString : cdId,
 				action : choice
-			}, function(data) {
-				alert("Data: " + data);
 			})
 		}
 	</script>

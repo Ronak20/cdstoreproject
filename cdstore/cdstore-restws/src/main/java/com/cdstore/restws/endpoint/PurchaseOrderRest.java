@@ -4,7 +4,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,7 @@ public class PurchaseOrderRest implements IPurchaseOrderRest {
 
 	@Autowired
 	private IPurchaseOrderService iPurchaseOrderService;
-	
+
 	public IPurchaseOrderService getiPurchaseOrderService() {
 		return iPurchaseOrderService;
 	}
@@ -32,14 +34,24 @@ public class PurchaseOrderRest implements IPurchaseOrderRest {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public void purchase(PurchaseOrder purchaseOrder) {
-
-		if (PURCHASE_COUNT != 5) {
-			iPurchaseOrderService.save(purchaseOrder);
-			PURCHASE_COUNT++;
-		} else {
-			PURCHASE_COUNT = 0;
+	@Produces(MediaType.TEXT_PLAIN)
+	public String purchase(PurchaseOrder purchaseOrder) {
+		try {
+			if (PURCHASE_COUNT != 5) {
+				iPurchaseOrderService.save(purchaseOrder);
+				PURCHASE_COUNT++;
+				return "creditcarderror";
+			} else {
+				PURCHASE_COUNT = 0;
+				return "creditcarderror";
+			}
+		} catch (Exception e) {
+			// if exception occurs while saving a purchase order
+			// relay a message accordingly so that shopping cart is not emptied
+			// and
+			// user will be redirected to main page again,
+			// which should request user to check out again
+			return "tryagain";
 		}
 
 	}

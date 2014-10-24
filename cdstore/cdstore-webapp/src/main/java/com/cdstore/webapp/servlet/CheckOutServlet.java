@@ -1,9 +1,7 @@
 package com.cdstore.webapp.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,17 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.cdstore.model.Address;
-import com.cdstore.model.CD;
 import com.cdstore.model.PurchaseOrder;
 import com.cdstore.model.PurchaseOrderItem;
-import com.cdstore.model.PurchaseOrderItemId;
 import com.cdstore.model.User;
 import com.cdstore.webapp.service.CdService;
 import com.cdstore.webapp.service.PurchaseOrderService;
 import com.cdstore.webapp.service.def.ICdService;
 import com.cdstore.webapp.service.def.IPurchaseOrderService;
-
 
 /**
  * Servlet implementation class LoginServlet
@@ -41,7 +35,6 @@ public class CheckOutServlet extends HttpServlet {
 	public void setUserService(final IPurchaseOrderService purchaseOrderService) {
 		this.purchaseOrderService = purchaseOrderService;
 	}
-	
 
 	public ICdService getiCdService() {
 		return iCdService;
@@ -63,8 +56,7 @@ public class CheckOutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
+	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
 			IOException {
 		// TODO Auto-generated method stub
 	}
@@ -73,54 +65,49 @@ public class CheckOutServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(final HttpServletRequest request,
-			final HttpServletResponse response) throws ServletException,
-			IOException {
-		//Check if user is already logged in or not.
-		User loggedUser = (User)request.getSession().getAttribute("user");		
-		//String[] checkedIdStrings = request.getParameterValues("addToCartCheckBox");
+	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
+			throws ServletException, IOException {
+		// Check if user is already logged in or not.
+		User loggedUser = (User) request.getSession().getAttribute("user");
+		// String[] checkedIdStrings =
+		// request.getParameterValues("addToCartCheckBox");
 		PurchaseOrder poOrder = new PurchaseOrder();
 		List<PurchaseOrderItem> poItemList = new ArrayList<PurchaseOrderItem>();
-		ArrayList<String>interimObj =(ArrayList<String>) request.getSession().getAttribute("selectedcds");
-		if(interimObj!= null )
-		{
-			//set the attribute nocdselected to false, because at lease one cd has been selected by user.
-			request.getSession().setAttribute("nocdselected","false" );
-			if(loggedUser == null)
-			{
-				//if user is not logged in, transfer to login page
-				this.getServletContext().getRequestDispatcher("/login.html")
-				.forward(request, response);
+		ArrayList<String> interimObj = (ArrayList<String>) request.getSession().getAttribute("selectedcds");
+		if (interimObj != null) {
+			if (interimObj.size() <= 0) {
+				// Is user selected and de-selected check-boxes then session
+				// attribute "selectedcds" will not be null but it will not
+				// contain anything. In such case user should not be allowed to
+				// check out because there is nothing in cart.
+				// set nocdselected attribute to display a warning message to
+				// user that at least
+				// one cd has to be selected before checking out.
+				request.getSession().setAttribute("nocdselected", "true");
+				response.sendRedirect("/cdstore-webapp/CdShowServlet");
+				return;
+
+			}
+			// set the attribute nocdselected to false, because at lease one cd
+			// has been selected by user.
+			request.getSession().setAttribute("nocdselected", "false");
+			if (loggedUser == null) {
+				// if user is not logged in, transfer to login page
+				this.getServletContext().getRequestDispatcher("/login.html").forward(request, response);
 				return;
 			}
-			/*List<String> selectedStrings = new ArrayList<String>();
-			for(int i=0; i < checkedIds.length ; i++){
-				selectedStrings.add(checkedIds[i]);
-			}
-				
-			List<CD> selectedCds = iCdService.getCds(selectedStrings);
-			for (CD cd : selectedCds) {
-				 PurchaseOrderItemId purchaseOrderItemId = new PurchaseOrderItemId();
-				 purchaseOrderItemId.setCd(cd);
-				 PurchaseOrderItem purchaseOrderItem = new PurchaseOrderItem();
-				 purchaseOrderItem.setPoId(purchaseOrderItemId);
-				 purchaseOrderItem.setPrice(cd.getPrice());
-				 poItemList.add(purchaseOrderItem);
-			}
-			poOrder.setStatus("ORDERED");
-			poOrder.setUser(loggedUser);//This should be fetched from session.
-			poOrder.setPurchaseOrderItem(poItemList);
-			purchaseOrderService.purchase(poOrder);*/
+
 			response.sendRedirect("/cdstore-webapp/confirmOrder");
-		}
-		else {
-			//set this attribute to display a warning message to user that at lease
-			//one cd has to be selected before checking out.
-			 request.getSession().setAttribute("nocdselected","true" );			 
-			 response.sendRedirect("/cdstore-webapp/CdShowServlet");
+			return;
+		} else {
+			// set this attribute to display a warning message to user that at
+			// lease
+			// one cd has to be selected before checking out.
+			request.getSession().setAttribute("nocdselected", "true");
+			response.sendRedirect("/cdstore-webapp/CdShowServlet");
+			return;
 		}
 
-		
 	}
 
 }

@@ -12,5 +12,5 @@ public interface IPurchaseOrderRest {
 	 * void purchase(List<PurchaseOrderItem> puchaseOrderItemList, User user,
 	 * List<CD> cdList);
 	 */
-	void purchase(PurchaseOrder purchaseOrder);
+	String purchase(PurchaseOrder purchaseOrder);
 }

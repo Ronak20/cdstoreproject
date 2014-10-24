@@ -21,9 +21,10 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 		this.purchaseOrderRestClient = purchaseOrderRestClient;
 	}
 	
-	public void purchase(PurchaseOrder purchaseOrder) {
+	public String purchase(PurchaseOrder purchaseOrder) {
 		
-		purchaseOrderRestClient.purchase(purchaseOrder);
+		String responseString= purchaseOrderRestClient.purchase(purchaseOrder);
+		return responseString;
 	}
 
 }

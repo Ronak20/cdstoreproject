@@ -19,6 +19,7 @@
 	 
     <link href="style.css" rel="stylesheet"/>
 	<link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet"/>
+	</head>
 <body>
   <!-- Navbar
     ================================================== -->
@@ -43,6 +44,7 @@
               </div><!-- /navbar-inner -->
             </div>
 <!-- ======================================================================================================================== -->	
+<form method="post" name="orderConfirmationForm" action="/cdstore-webapp/placeOrder" id="orderConfirmationForm" >
 <div id="mainBody" class="container">
 <header id="header">
 <div class="row">
@@ -50,8 +52,10 @@
 	<a href="index.html"><img src="assets/img/logo.png" alt="Bootsshop"/></a>
 
 <div class="pull-right"> <br/>
-	<a href="product_summary.html"> <span class="btn btn-mini btn-warning"> <i class="icon-shopping-cart icon-white"></i> [ <c:out value="${cartItems}"></c:out> ] </span> </a>
-	<a href="product_summary.html"><span class="btn btn-mini active">$${totalPrice}</span></a> 
+	<input type="submit" class="badge-warning btn-large" name="confirmOrder" value="Confirm Order" onclick="">
+	<input type="submit" class="badge-warning btn-large cancel" name = "cancelOrder"value="Cancel order">
+	<a href="#"> <span class="btn btn-mini btn-warning"> <i class="icon-shopping-cart icon-white"></i> [ <c:out value="${cartItems}"></c:out> ] </span> </a>
+	<a href="#"><span class="btn btn-mini active">$${totalPrice}</span></a> 
 </div>
 </div>
 </div>
@@ -96,6 +100,57 @@
                 </div>
                 </c:forEach>
               </div>
+              <div id="crediDetails" class="well">
+              <h3>Credit Card information</h3>
+              <c:choose>
+			 <c:when test="${credidCardFailed =='true'}">
+			 <strong><label class="badge-warning btn" id="creditCardErrorLabel">Credit Card Authorization Failed !</label></strong>
+			</c:when>				
+			</c:choose>
+			<!-- check if credit card information is available in session , then fill the form from previously entered information -->
+			 <c:choose>
+			 <c:when test="${sessionScope.cardNumber != null}">
+			 <c:set var="cCardNumber" value="${sessionScope.cardNumber}"></c:set>
+			</c:when>	
+			<c:otherwise>
+			 <c:set var="cCardNumber" value="Input your Credit number here "></c:set>
+			</c:otherwise>			
+			</c:choose>
+			<c:choose>
+			 <c:when test="${sessionScope.expirydate != null}">
+			 <c:set var="cExpiryDate" value="${sessionScope.expirydate}"></c:set>
+			</c:when>	
+			<c:otherwise>
+			 <c:set var="cExpiryDate" value="YY-MM-DD "></c:set>
+			</c:otherwise>			
+			</c:choose>
+			<c:choose>
+			 <c:when test="${sessionScope.cvvValue != null}">
+			 <c:set var="ccvvValue" value="${sessionScope.cvvValue}"></c:set>
+			</c:when>	
+			<c:otherwise>
+			 <c:set var="cvvValue" value="cvv code on your credit card "></c:set>
+			</c:otherwise>			
+			</c:choose>
+              <div class="control-group">
+			<label class="control-label" for="inputCreditTextBox">CreditCardNummber <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" name="inputCreditTextBox" id="inputCredit" placeholder="${cCardNumber}">
+			</div>
+		 </div>
+              <div class="control-group">
+			<label class="control-label" for="expiryDateTextBox">Expiration Date <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" name="expiryDateTextBox" id="expiryDate" placeholder="${cExpiryDate}">
+			</div>
+		 </div>
+		  <div class="control-group">
+			<label class="control-label" for="cvvTextBox">cvv code on your credit card <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" name="cvvTextBox" id="cvvTextBox" placeholder="${ccvvValue}">
+			</div>
+		 </div>
+              </div>
 <!-- Footer ------------------------------------------------------ -->
 <hr class="soft">
 <div  id="footerSection">
@@ -136,7 +191,7 @@
 	<p class="pull-right">&copy; Elite Coderz</p>
 	</div><!-- /footer -->
 </div><!-- /container -->
-
+</form>
 
     <!-- Le javascript
     ================================================== -->
@@ -160,9 +215,30 @@
     <script src="assets/js/bootstrap-affix.js"></script>
     <script src="assets/js/jquery.lightbox-0.5.js"></script>
 	<script src="assets/js/bootsshoptgl.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
 	 <script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox();
+    });
+    $(document).ready(function () {
+		//form validation
+        $('#orderConfirmationForm').validate({ 
+            rules: {
+            	inputCreditTextBox: {
+                    required: true,
+                    minlength: 16
+                },
+                expiryDateTextBox: {
+                    required: true,
+                    minlength: 8
+                },
+                cvvTextBox: {
+                    required: true,
+                    minlength: 3
+                }
+            }
+        });
+
     });
     </script>
   </body>
