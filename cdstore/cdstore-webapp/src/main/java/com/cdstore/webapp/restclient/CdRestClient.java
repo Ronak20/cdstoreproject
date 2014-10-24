@@ -8,6 +8,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import com.cdstore.model.CD;
 import com.cdstore.webapp.CdStoreRestClientConfig;
 import com.cdstore.webapp.restclient.def.ICdRestClient;
@@ -16,6 +19,7 @@ public class CdRestClient implements ICdRestClient {
 
 	private Client restClient;
 	private WebTarget webTarget;
+	private static Logger logger = LogManager.getLogger(CdRestClient.class);
 
 	public CdRestClient() {
 		setRestClient(CdStoreRestClientConfig.getRestClient());
@@ -41,15 +45,17 @@ public class CdRestClient implements ICdRestClient {
 	}
 
 	/*
-	 * @author Sandarbh
-	 * Method to get the existing CD categories from web service
+	 * @author Sandarbh Method to get the existing CD categories from web
+	 * service
 	 */
 	public List<String> getAllCDCategories() {
-		WebTarget webTarget = this.webTarget.path("cddrive").path("cdCategories");
+		WebTarget webTarget = this.webTarget.path("cddrive").path(
+				"cdCategories");
 		Invocation.Builder invocationBuilder = webTarget
 				.request(MediaType.APPLICATION_JSON);
-		List<String> response = invocationBuilder.get(new GenericType<List<String>>() {
-		});
+		List<String> response = invocationBuilder
+				.get(new GenericType<List<String>>() {
+				});
 		return response;
 	}
 
@@ -73,15 +79,14 @@ public class CdRestClient implements ICdRestClient {
 	}
 
 	public List<CD> getCds(List<String> cdIds) {
-		WebTarget webTarget = this.webTarget.path("cddrive").path(
-				"cdIds");
-		WebTarget webTargetWithQueryParam = webTarget.queryParam("cdIds",
-				cdIds);
+		WebTarget webTarget = this.webTarget.path("cddrive").path("cdIds");
+		WebTarget webTargetWithQueryParam = webTarget
+				.queryParam("cdIds", cdIds);
 		Invocation.Builder invocationBuilder = webTargetWithQueryParam
 				.request(MediaType.APPLICATION_JSON);
 		List<CD> response = invocationBuilder.get(new GenericType<List<CD>>() {
 		});
 		return response;
-		
+
 	}
 }

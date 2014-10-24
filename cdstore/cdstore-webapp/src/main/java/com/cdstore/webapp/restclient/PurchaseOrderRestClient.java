@@ -1,8 +1,5 @@
 package com.cdstore.webapp.restclient;
 
-import com.cdstore.model.PurchaseOrder;
-import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
-
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -10,7 +7,9 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.cdstore.model.PurchaseOrder;
 import com.cdstore.webapp.CdStoreRestClientConfig;
+import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
