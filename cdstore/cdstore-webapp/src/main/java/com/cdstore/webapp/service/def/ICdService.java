@@ -3,6 +3,9 @@ package com.cdstore.webapp.service.def;
 import java.util.List;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.exception.InternalServerException;
+import com.cdstore.webapp.exception.InvalidParameterException;
+import com.cdstore.webapp.exception.NotFoundException;
 
 /**
  * Contains definition of cd service
@@ -17,14 +20,15 @@ public interface ICdService {
 	 * 
 	 * @return all cds
 	 */
-	List<CD> getAll();
+	List<CD> getAll() throws InternalServerException, NotFoundException;
 
 	/**
 	 * Retrieves cd categories
 	 * 
 	 * @return all cd categories
 	 */
-	List<String> getAllCDCategories();
+	List<String> getAllCDCategories() throws InternalServerException,
+			NotFoundException;
 
 	/**
 	 * Retrieves cd of particular category
@@ -33,7 +37,9 @@ public interface ICdService {
 	 *            name of category
 	 * @return all cds of category
 	 */
-	List<CD> getAllCDsForCategory(String categoryStrings);
+	List<CD> getAllCDsForCategory(String categoryStrings)
+			throws InternalServerException, NotFoundException,
+			InvalidParameterException;
 
 	/**
 	 * Retrives cd using cd ids
@@ -42,5 +48,6 @@ public interface ICdService {
 	 *            list of all cd ids
 	 * @return list of cd for cd ids
 	 */
-	List<CD> getCds(List<String> cdIds);
+	List<CD> getCds(List<String> cdIds) throws InternalServerException,
+			NotFoundException, InvalidParameterException;
 }

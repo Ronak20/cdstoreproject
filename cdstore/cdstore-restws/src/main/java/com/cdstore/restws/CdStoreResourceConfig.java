@@ -9,7 +9,7 @@ import com.cdstore.restws.endpoint.PurchaseOrderRest;
 import com.cdstore.restws.endpoint.UserRest;
 
 /**
- * 
+ * Configuring resources
  * 
  * @author Ronak Chaudhari
  */

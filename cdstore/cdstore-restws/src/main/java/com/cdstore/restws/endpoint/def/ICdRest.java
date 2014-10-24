@@ -1,18 +1,45 @@
 package com.cdstore.restws.endpoint.def;
 
 import java.util.List;
-import java.util.Map;
 
-import com.cdstore.model.CD;
+import javax.ws.rs.core.Response;
 
+/**
+ * rest endpoint definition for cd
+ * 
+ * @author Ronak
+ *
+ */
 public interface ICdRest {
-	List<CD> getAllCD();
 
-	List<String> getAllCDCategories();
+	/**
+	 * provides list of cds
+	 * 
+	 * @return list of cd json object
+	 */
+	Response getAllCD();
 
-	List<CD> getAllCDsForCategory(String categoryString);
+	/**
+	 * Provides list of all cd categories
+	 * 
+	 * @return list of cd json object
+	 */
+	Response getAllCDCategories();
 
-	Map<String, List<CD>> getCDMap();
-	
-	List<CD> getCds(List<String> cdIds);
+	/**
+	 * Provides cd of particular category
+	 * 
+	 * @param categoryString
+	 * @return list of cd json object
+	 */
+	Response getAllCDsForCategory(String categoryString);
+
+	/**
+	 * Provides cd using cd ids
+	 * 
+	 * @param cdIds
+	 *            list of cd ids
+	 * @return list of cd json objct
+	 */
+	Response getCds(List<String> cdIds);
 }

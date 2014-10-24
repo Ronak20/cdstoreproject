@@ -18,14 +18,14 @@ public interface ICdService {
 	 * 
 	 * @return all cds
 	 */
-	List<CD> getAllCD();
+	List<CD> getAllCD() throws Exception;
 
 	/**
 	 * Retrieves cd categories
 	 * 
 	 * @return all cd categories
 	 */
-	List<String> getAllCDCategories();
+	List<String> getAllCDCategories() throws Exception;
 
 	/**
 	 * Retrieves cd of particular category
@@ -34,14 +34,14 @@ public interface ICdService {
 	 *            name of category
 	 * @return all cds of category
 	 */
-	List<CD> getAllCDForCategory(String categoryName);
+	List<CD> getAllCDForCategory(String categoryName) throws Exception;
 
 	/**
 	 * Creates map by category and list of cds
 	 * 
 	 * @return category as key and list of cds of that category
 	 */
-	Map<String, List<CD>> getCDMap();
+	Map<String, List<CD>> getCDMap() throws Exception;
 
 	/**
 	 * Retrives cd using cd ids
@@ -50,5 +50,5 @@ public interface ICdService {
 	 *            list of all cd ids
 	 * @return list of cd for cd ids
 	 */
-	List<CD> getCds(List<String> cdIds);
+	List<CD> getCds(List<String> cdIds) throws Exception;
 }

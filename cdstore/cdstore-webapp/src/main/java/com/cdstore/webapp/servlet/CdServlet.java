@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.exception.InternalServerException;
+import com.cdstore.webapp.exception.NotFoundException;
 import com.cdstore.webapp.service.CdService;
 import com.cdstore.webapp.service.def.ICdService;
 
@@ -44,10 +46,20 @@ public class CdServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		List<CD> cdDriveList = iCdService.getAll();
-		request.setAttribute("cdDriveList", cdDriveList);
-		this.getServletContext().getRequestDispatcher("/cd.jsp")
-				.include(request, response);
+		List<CD> cdDriveList;
+		try {
+			cdDriveList = iCdService.getAll();
+
+			request.setAttribute("cdDriveList", cdDriveList);
+			this.getServletContext().getRequestDispatcher("/cd.jsp")
+					.include(request, response);
+		} catch (InternalServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

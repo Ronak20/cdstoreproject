@@ -6,6 +6,12 @@ import com.cdstore.dbagent.dao.def.IAddressDao;
 import com.cdstore.model.Address;
 import com.cdstore.restws.service.def.IAddressService;
 
+/**
+ * Implementation of IAddressService
+ * 
+ * @author Ronak
+ *
+ */
 public class AddressService implements IAddressService {
 
 	@Autowired

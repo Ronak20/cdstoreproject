@@ -7,6 +7,9 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.exception.InternalServerException;
+import com.cdstore.webapp.exception.InvalidParameterException;
+import com.cdstore.webapp.exception.NotFoundException;
 import com.cdstore.webapp.restclient.CdRestClient;
 
 public class CdRestClientTest extends TestCase {
@@ -17,22 +20,25 @@ public class CdRestClientTest extends TestCase {
 		cdRestClient = new CdRestClient();
 	}
 
-	public void testGetAll() {
+	public void testGetAll() throws InternalServerException, NotFoundException {
 		List<CD> cdList = cdRestClient.getAll();
 		Assert.assertTrue(cdList.size() == 9);
 	}
 
-	public void testGetAllCDCategories() {
+	public void testGetAllCDCategories() throws InternalServerException,
+			NotFoundException {
 		List<String> cdList = cdRestClient.getAllCDCategories();
 		Assert.assertTrue(cdList.size() == 3);
 	}
 
-	public void testGetAllCDsForCategory() {
+	public void testGetAllCDsForCategory() throws InternalServerException,
+			NotFoundException, InvalidParameterException {
 		List<CD> cdList = cdRestClient.getAllCDsForCategory("POP");
 		Assert.assertTrue(cdList.size() == 3);
 	}
 
-	public void testGetCds() {
+	public void testGetCds() throws InternalServerException, NotFoundException,
+			InvalidParameterException {
 		List<String> cdIds = new ArrayList<String>(0);
 		cdIds.add("1");
 		cdIds.add("2");

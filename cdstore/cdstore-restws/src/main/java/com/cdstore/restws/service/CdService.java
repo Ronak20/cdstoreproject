@@ -9,6 +9,12 @@ import com.cdstore.dbagent.dao.def.ICdDao;
 import com.cdstore.model.CD;
 import com.cdstore.restws.service.def.ICdService;
 
+/**
+ * Implementation of ICdService
+ * 
+ * @author Ronak
+ *
+ */
 public class CdService implements ICdService {
 
 	@Autowired
@@ -26,42 +32,19 @@ public class CdService implements ICdService {
 		return cdDao.getAllCD();
 	}
 
-	/*
-	 * @author Sandarbh
-	 * 
-	 * @see com.cdstore.restws.service.def.ICdService#getAllCDCategories()
-	 */
-	public List<String> getAllCDCategories() {
+	public List<String> getAllCDCategories() throws Exception {
 		return cdDao.getCdCategories();
 	}
 
-	/*
-	 * @param categories- list of categories, for which CDs are to be fetched
-	 * 
-	 * @see
-	 * com.cdstore.restws.service.def.ICdService#getAllCDForCategories(java.
-	 * util.List)
-	 */
-	public List<CD> getAllCDForCategory(String categoryName) {
+	public List<CD> getAllCDForCategory(String categoryName) throws Exception {
 		return cdDao.getCdsForACategory(categoryName);
 	}
 
-	/*
-	 * @author Sandarbh
-	 * 
-	 * @see com.cdstore.restws.service.def.ICdService#getCDMap() This method
-	 * contacts Data layer to fetch Cd categories and corresponding CDs
-	 */
-	public Map<String, List<CD>> getCDMap() {
+	public Map<String, List<CD>> getCDMap() throws Exception {
 		return cdDao.getCdMap();
 	}
-	
-	/*
-	 * @autjor Sandarbh
-	 * @see com.cdstore.restws.service.def.ICdService#getCd(java.util.List)
-	 * returns List of CD for the given list of Ids
-	 */
-	public List<CD> getCds(List<String> cdIds){
+
+	public List<CD> getCds(List<String> cdIds) throws Exception {
 		return cdDao.getCds(cdIds);
 	}
 }

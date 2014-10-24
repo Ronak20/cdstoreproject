@@ -8,6 +8,12 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+/**
+ * aspect to log methods of Cd store rest web service
+ * 
+ * @author Ronak Chaudhari
+ *
+ */
 @Aspect
 public class CdStoreRestWSLogger {
 

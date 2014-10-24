@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.exception.InternalServerException;
+import com.cdstore.webapp.exception.InvalidParameterException;
+import com.cdstore.webapp.exception.NotFoundException;
 import com.cdstore.webapp.service.CdService;
 import com.cdstore.webapp.service.PurchaseOrderService;
 import com.cdstore.webapp.service.def.ICdService;
@@ -51,41 +54,62 @@ public class ConfirmOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+	protected void doGet(final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException,
 			IOException {
-		Integer totalPrice = 0; // the total price that should show up in
-								// shopping cart. We will update in later
-								// according to the request received.
-		Integer cartItems = 0; // Total number of items in cart, We will update
-								// this later in the code.
-		// fetch the selected cds from session
-		ArrayList<String> checkedIds = (ArrayList<String>) request.getSession().getAttribute("selectedcds");
-		if (checkedIds != null) {
-			List<CD> selectedCds = iCdService.getCds(checkedIds);
-			request.setAttribute("requestselectedcds", selectedCds);
-			for (CD cd : selectedCds) {
-				totalPrice = totalPrice + cd.getPrice();
+		try {
+			Integer totalPrice = 0; // the total price that should show up in
+									// shopping cart. We will update in later
+									// according to the request received.
+			Integer cartItems = 0; // Total number of items in cart, We will
+									// update
+									// this later in the code.
+			// fetch the selected cds from session
+			ArrayList<String> checkedIds = (ArrayList<String>) request
+					.getSession().getAttribute("selectedcds");
+			if (checkedIds != null) {
+				List<CD> selectedCds;
+
+				selectedCds = iCdService.getCds(checkedIds);
+
+				request.setAttribute("requestselectedcds", selectedCds);
+				for (CD cd : selectedCds) {
+					totalPrice = totalPrice + cd.getPrice();
+				}
+				cartItems = selectedCds.size();
+				request.setAttribute("totalPrice", totalPrice);
+				request.setAttribute("cartItems", cartItems);
+				/*
+				 * Cookie[] requestCookies= request.getCookies(); for (Cookie
+				 * cookie : requestCookies) { if(cookie.getName() ==
+				 * "credidCardError" && cookie.getValue()=="true"){
+				 * request.setAttribute("credidCardFailed", "true"); return; } }
+				 */
+				this.getServletContext()
+						.getRequestDispatcher("/confirmOrder.jsp")
+						.forward(request, response);
+				return;
+			} else {
+				// if session doesn't contain information about shopping cart.
+				// redirect to home page.
+				// set this attribute to display a warning message to user that
+				// at
+				// lease
+				// one cd has to be selected before checking out.
+				request.getSession().setAttribute("nocdselected", "true");
+				response.sendRedirect("/cdstore-webapp/CdShowServlet");
+				return;
 			}
-			cartItems = selectedCds.size();
-			request.setAttribute("totalPrice", totalPrice);
-			request.setAttribute("cartItems", cartItems);
-			/*
-			 * Cookie[] requestCookies= request.getCookies(); for (Cookie cookie
-			 * : requestCookies) { if(cookie.getName() == "credidCardError" &&
-			 * cookie.getValue()=="true"){
-			 * request.setAttribute("credidCardFailed", "true"); return; } }
-			 */
-			this.getServletContext().getRequestDispatcher("/confirmOrder.jsp").forward(request, response);
-			return;
-		} else {
-			// if session doesn't contain information about shopping cart.
-			// redirect to home page.
-			// set this attribute to display a warning message to user that at
-			// lease
-			// one cd has to be selected before checking out.
-			request.getSession().setAttribute("nocdselected", "true");
-			response.sendRedirect("/cdstore-webapp/CdShowServlet");
-			return;
+
+		} catch (InternalServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidParameterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -93,8 +117,9 @@ public class ConfirmOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(final HttpServletRequest request,
+			final HttpServletResponse response) throws ServletException,
+			IOException {
 
 	}
 

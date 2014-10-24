@@ -21,6 +21,12 @@ import com.cdstore.restws.service.def.IAddressService;
 import com.cdstore.restws.service.def.IPurchaseOrderService;
 import com.cdstore.restws.service.def.IUserService;
 
+/**
+ * rest endpoint of User
+ * 
+ * @author Ronak
+ *
+ */
 @Component
 @Path("/user")
 public class UserRest implements IUserRest {

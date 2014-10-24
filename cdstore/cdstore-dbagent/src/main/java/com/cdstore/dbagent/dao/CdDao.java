@@ -7,12 +7,15 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cdstore.dbagent.LogConstant;
 import com.cdstore.dbagent.dao.def.ICdDao;
 import com.cdstore.model.CD;
 
@@ -76,9 +79,10 @@ public class CdDao implements ICdDao {
 			String hql = "FROM CD C WHERE C.category in (:categories)";
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			query.setParameter("categories", categoryName);
-			logger.debug(LogConstant.RETURN + "cdList :" + (List<CD>) query.list()));
+			List<CD> cdList = (List<CD>) query.list();
+			logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 			logger.info(LogConstant.EXITED + "getCdsForACategory");
-			return ((List<CD>) query.list());
+			return cdList;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			logger.info(LogConstant.EXITED + "getCdsForACategory");

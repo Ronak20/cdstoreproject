@@ -4,9 +4,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +13,12 @@ import com.cdstore.model.PurchaseOrder;
 import com.cdstore.restws.endpoint.def.IPurchaseOrderRest;
 import com.cdstore.restws.service.def.IPurchaseOrderService;
 
+/**
+ * rest implementation for purchase order
+ * 
+ * @author Ronak
+ *
+ */
 @Component
 @Path("/purchase")
 public class PurchaseOrderRest implements IPurchaseOrderRest {
@@ -26,7 +30,8 @@ public class PurchaseOrderRest implements IPurchaseOrderRest {
 		return iPurchaseOrderService;
 	}
 
-	public void setiPurchaseOrderService(IPurchaseOrderService iPurchaseOrderService) {
+	public void setiPurchaseOrderService(
+			IPurchaseOrderService iPurchaseOrderService) {
 		this.iPurchaseOrderService = iPurchaseOrderService;
 	}
 
