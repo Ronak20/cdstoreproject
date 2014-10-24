@@ -1,7 +1,5 @@
 package com.cdstore.dbagent.dao.def;
 
-import java.util.List;
-
 import com.cdstore.model.User;
 
 /**
@@ -10,9 +8,31 @@ import com.cdstore.model.User;
  * @author Ronak
  */
 public interface IUserDao {
+
+	/**
+	 * Saves user
+	 * 
+	 * @param user
+	 */
 	void save(User user);
 
-	List<User> getUser(String userName, String password);
+	/**
+	 * Retrives user using username and hashed password
+	 * 
+	 * @param userName
+	 *            user name
+	 * @param password
+	 *            password
+	 * @return user
+	 */
+	User getUser(String userName, String password);
 
+	/**
+	 * Retrieves user using user id
+	 * 
+	 * @param userId
+	 *            id of user
+	 * @return user
+	 */
 	User getUser(String userId);
 }

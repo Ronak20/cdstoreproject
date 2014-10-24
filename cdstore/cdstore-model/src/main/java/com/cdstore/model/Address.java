@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * pojo for address
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "address")
 public class Address {

@@ -20,6 +20,12 @@ import org.hibernate.annotations.LazyCollectionOption;
 import com.cdstore.model.serializer.UserSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * pojo for user
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "user")
 @JsonSerialize(using = UserSerializer.class)

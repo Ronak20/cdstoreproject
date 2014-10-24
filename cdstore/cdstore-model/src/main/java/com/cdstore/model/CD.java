@@ -15,6 +15,12 @@ import org.hibernate.annotations.LazyCollectionOption;
 import com.cdstore.model.serializer.CdDriveSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * pojo for cd
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "cd")
 @JsonSerialize(using = CdDriveSerializer.class)

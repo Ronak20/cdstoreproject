@@ -19,6 +19,12 @@ import com.cdstore.dbagent.LogConstant;
 import com.cdstore.dbagent.dao.def.ICdDao;
 import com.cdstore.model.CD;
 
+/**
+ * Implementation of ICdDao
+ * 
+ * @author Ronak
+ *
+ */
 @Repository
 public class CdDao implements ICdDao {
 
@@ -44,9 +50,6 @@ public class CdDao implements ICdDao {
 		return cdDriveList;
 	}
 
-	/*
-	 * @author : Sandarbh Method to fetch the CD categories from database.
-	 */
 	@Transactional
 	public List<String> getCdCategories() {
 		logger.info(LogConstant.ENTERED + "getCdCategories");
@@ -67,10 +70,6 @@ public class CdDao implements ICdDao {
 		}
 	}
 
-	/*
-	 * @author Sandarbh method to fetch all the Cds for given categories, from
-	 * database.
-	 */
 	@Transactional
 	public List<CD> getCdsForACategory(String categoryName) {
 		logger.info(LogConstant.ENTERED + "getCdsForACategory");
@@ -90,9 +89,6 @@ public class CdDao implements ICdDao {
 		}
 	}
 
-	/*
-	 * @author Sandarbh Method to fetch CD map from database.
-	 */
 	@Transactional
 	public Map<String, List<CD>> getCdMap() {
 		logger.info(LogConstant.ENTERED + "getCdMap");
@@ -122,12 +118,6 @@ public class CdDao implements ICdDao {
 
 	}
 
-	/**
-	 * @author Sandarbh
-	 * @param cdId
-	 *            the cdId of the CD that needs to be fetched
-	 * @return
-	 */
 	@Transactional
 	public List<CD> getCds(List<String> cdIds) {
 		logger.info(LogConstant.ENTERED + "getCds");

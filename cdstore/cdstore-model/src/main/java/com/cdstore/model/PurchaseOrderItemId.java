@@ -5,6 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
+/**
+ * composite key for purchase order item
+ * 
+ * @author Ronak
+ *
+ */
 @Embeddable
 public class PurchaseOrderItemId implements Serializable {
 

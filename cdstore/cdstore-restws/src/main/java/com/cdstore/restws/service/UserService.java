@@ -1,7 +1,5 @@
 package com.cdstore.restws.service;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +40,11 @@ public class UserService implements IUserService {
 		String userName = user.getUsername();
 		String password = user.getPassword();
 
+		User userList = null;
 		if (userName != null && !userName.isEmpty() && password != null
 				&& !password.isEmpty()) {
-			List<User> userList = userDao.getUser(userName, password);
-			if (userList != null && userList.size() >0) {
-				User dbUser = userList.get(0);
-				return dbUser;
-			}
+			userList = userDao.getUser(userName, password);
+			return userList;
 		}
 		logger.debug(LogConstant.RETURN + "user :" + null);
 		logger.info(LogConstant.EXITED + "authenticate");

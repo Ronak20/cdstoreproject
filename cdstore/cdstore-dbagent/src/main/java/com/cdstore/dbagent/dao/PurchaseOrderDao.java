@@ -15,6 +15,12 @@ import com.cdstore.dbagent.LogConstant;
 import com.cdstore.dbagent.dao.def.IPurchaseOrderDao;
 import com.cdstore.model.PurchaseOrder;
 
+/**
+ * Implementation of IPurchaseOrderDao
+ * 
+ * @author Ronak
+ *
+ */
 @Repository
 public class PurchaseOrderDao implements IPurchaseOrderDao {
 

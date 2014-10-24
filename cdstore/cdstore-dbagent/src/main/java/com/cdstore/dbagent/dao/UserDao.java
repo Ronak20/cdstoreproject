@@ -16,6 +16,12 @@ import com.cdstore.dbagent.LogConstant;
 import com.cdstore.dbagent.dao.def.IUserDao;
 import com.cdstore.model.User;
 
+/**
+ * Implementation of IUserDao
+ * 
+ * @author Ronak
+ *
+ */
 @Repository
 public class UserDao implements IUserDao {
 
@@ -40,7 +46,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Transactional
-	public List<User> getUser(String userName, String password) {
+	public User getUser(String userName, String password) {
 		logger.info(LogConstant.ENTERED + "getUser");
 		logger.info(LogConstant.PARAMETER + "userName :" + userName);
 		logger.info(LogConstant.PARAMETER + "password :" + password);
@@ -49,10 +55,18 @@ public class UserDao implements IUserDao {
 		criteria.add(Restrictions.eq("username", userName));
 		criteria.add(Restrictions.eq("password", password));
 
-		List<User> userList = criteria.list();
-		logger.debug(LogConstant.RETURN + "userList :" + userList);
+		if (userName != null && !userName.isEmpty() && password != null
+				&& !password.isEmpty()) {
+			List<User> userList = criteria.list();
+			if (userList != null) {
+				User dbUser = userList.get(0);
+				return dbUser;
+			}
+		}
+
+		logger.debug(LogConstant.RETURN + "userList :" + null);
 		logger.info(LogConstant.EXITED + "getUser");
-		return userList;
+		return null;
 	}
 
 	@Transactional

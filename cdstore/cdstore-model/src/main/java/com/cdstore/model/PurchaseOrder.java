@@ -14,6 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * pojo for purchase order
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "po")
 public class PurchaseOrder {

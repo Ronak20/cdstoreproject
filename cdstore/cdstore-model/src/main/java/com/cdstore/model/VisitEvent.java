@@ -10,6 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * pojo for visit event
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "visitevent")
 public class VisitEvent {

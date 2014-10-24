@@ -8,6 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+/**
+ * pojo for purchase order item
+ * 
+ * @author Ronak
+ *
+ */
 @Entity
 @Table(name = "poitem")
 @AssociationOverrides({

@@ -15,6 +15,12 @@ import com.cdstore.model.PurchaseOrderItemId;
 import com.cdstore.model.User;
 import com.cdstore.model.VisitEvent;
 
+/**
+ * Provides session factory
+ * 
+ * @author Ronak
+ *
+ */
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory;

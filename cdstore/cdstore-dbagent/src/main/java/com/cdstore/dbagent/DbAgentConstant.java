@@ -1,5 +1,11 @@
 package com.cdstore.dbagent;
 
+/**
+ * Contains configuration details
+ * 
+ * @author Ronak
+ *
+ */
 public class DbAgentConstant {
 
 	public static final String DB_USERNAME = "root";

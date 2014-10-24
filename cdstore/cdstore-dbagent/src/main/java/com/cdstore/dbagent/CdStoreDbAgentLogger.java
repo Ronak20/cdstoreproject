@@ -8,6 +8,12 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+/**
+ * Aspect for logging in db agent
+ * 
+ * @author Ronak
+ *
+ */
 @Aspect
 public class CdStoreDbAgentLogger {
 

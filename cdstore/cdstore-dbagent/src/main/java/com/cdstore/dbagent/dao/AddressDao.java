@@ -12,6 +12,12 @@ import com.cdstore.dbagent.LogConstant;
 import com.cdstore.dbagent.dao.def.IAddressDao;
 import com.cdstore.model.Address;
 
+/**
+ * Implementation of IAddressDao
+ * 
+ * @author Ronak
+ *
+ */
 @Repository
 public class AddressDao implements IAddressDao {
 

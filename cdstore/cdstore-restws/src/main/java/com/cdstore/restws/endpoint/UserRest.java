@@ -81,6 +81,8 @@ public class UserRest implements IUserRest {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public User authenticate(User user) {
 		User dbUser = userservice.authenticate(user);
+		dbUser.setPurchaseOrderList(null);
+		dbUser.setAddress(null);
 		return dbUser;
 	}
 
