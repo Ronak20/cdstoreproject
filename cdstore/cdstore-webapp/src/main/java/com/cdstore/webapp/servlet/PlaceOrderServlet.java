@@ -83,7 +83,7 @@ public class PlaceOrderServlet extends HttpServlet {
 					if (loggedUser == null) {
 						// if user is not logged in, transfer to login page
 						this.getServletContext()
-								.getRequestDispatcher("/login.html")
+								.getRequestDispatcher("/login.jsp")
 								.forward(request, response);
 						return;
 					}

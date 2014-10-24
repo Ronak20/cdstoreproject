@@ -38,12 +38,18 @@ public class UserDetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		String userId = req.getParameter("userid");
+		if(userId !=null){
+			User user = userService.getUser(userId);
 
-		User user = userService.getUser(userId);
-
-		req.setAttribute("user", user);
-		this.getServletContext().getRequestDispatcher("/userDetails.jsp")
-				.include(req, resp);
+			req.setAttribute("user", user);
+			this.getServletContext().getRequestDispatcher("/userDetails.jsp")
+					.include(req, resp);
+		}
+		else {
+			this.getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+			return;
+		}
+		
 	}
 
 }

@@ -93,7 +93,7 @@ public class CheckOutServlet extends HttpServlet {
 			request.getSession().setAttribute("nocdselected", "false");
 			if (loggedUser == null) {
 				// if user is not logged in, transfer to login page
-				this.getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+				this.getServletContext().getRequestDispatcher("/login.jsp").forward(request, response);
 				return;
 			}
 

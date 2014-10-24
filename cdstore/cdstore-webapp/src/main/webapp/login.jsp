@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <meta charset="utf-8">
-<title>Online CD Shop</title>
+<title>Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -27,6 +31,12 @@
 			<div class="well">
 			<h5>ALREADY REGISTERED ?</h5>
 	<form method="post" action="login" id="loginForm">
+	<c:choose>
+		<c:when test="${message == 'Invalid username or password'}">
+		<p>***Invalid username or password***</p>
+		</c:when>
+		
+	</c:choose>
 		<table>
 			<tr>
 				<td>Username :</td>

@@ -45,7 +45,7 @@ public class UserService implements IUserService {
 		if (userName != null && !userName.isEmpty() && password != null
 				&& !password.isEmpty()) {
 			List<User> userList = userDao.getUser(userName, password);
-			if (userList != null) {
+			if (userList != null && userList.size() >0) {
 				User dbUser = userList.get(0);
 				return dbUser;
 			}
