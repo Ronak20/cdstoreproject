@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.cdstore.model.Address;
 import com.cdstore.model.User;
+import com.cdstore.webapp.MD5;
 import com.cdstore.webapp.service.UserService;
 import com.cdstore.webapp.service.def.IUserService;
 
@@ -35,35 +36,38 @@ public class RegisterServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		String street = request.getParameter("street");
 		String province = request.getParameter("province");
 		String country = request.getParameter("country");
 		String zip = request.getParameter("zip");
 		String phone = request.getParameter("phone");
-		
+
 		Address address = new Address();
-		
+
 		address.setCountry(country);
 		address.setPhone(phone);
 		address.setProvince(province);
 		address.setStreet(street);
 		address.setZip(zip);
-				
+
 		User user = new User();
 		user.setFirstName(request.getParameter("firstname"));
 		user.setLastName(request.getParameter("lastname"));
 		user.setUsername(request.getParameter("username"));
-		user.setPassword(request.getParameter("password"));
+
+		String hashedPassword = MD5.md5(request.getParameter("password"));
+
+		user.setPassword(hashedPassword);
 		user.setAddress(address);
-		
+
 		userService.save(user);
 
 		resp.sendRedirect("/cdstore-webapp/login.html");

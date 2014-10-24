@@ -28,16 +28,38 @@
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">false</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+
+				<!-- connection pooling configuration -->
+
+				<!-- <prop key="hibernate.c3p0.acquire_increment">1</prop>
+				<prop key="hibernate.c3p0.idle_test_period">100</prop>
+				<prop key="hibernate.c3p0.max_size">10</prop>
+				<prop key="hibernate.c3p0.max_statements">10</prop>
+				<prop key="hibernate.c3p0.min_size">10</prop>
+				<prop key="hibernate.c3p0.timeout">100</prop> -->
 			</props>
 		</property>
 	</bean>
 
-	<bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
+	<!-- <bean id="dataSource" class="org.apache.tomcat.dbcp.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="url" value="jdbc:mysql://localhost:3306/cdstore" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
-	</bean>
+	</bean> -->
+	
+	<bean id="dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="org.hibernate.dialect.MySQLDialect" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/cdstore" />
+        <property name="user" value="root" />
+        <property name="password" value="root" /> 
+
+        <!-- these are C3P0 properties -->
+        <property name="acquireIncrement" value="1" />
+        <property name="minPoolSize" value="10" />
+        <property name="maxPoolSize" value="10" />
+        <property name="maxIdleTime" value="100" />
+ </bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">

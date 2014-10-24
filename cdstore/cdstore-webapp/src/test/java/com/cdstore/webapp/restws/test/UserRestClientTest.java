@@ -20,4 +20,12 @@ public class UserRestClientTest extends TestCase {
 
 		System.out.println(aUser.toString());
 	}
+
+	public void testGetUserDetails() {
+		IUserRestClient userRestClient = new UserRestClient();
+
+		User user = userRestClient.getUser("1");
+
+		System.out.println(user.toString());
+	}
 }

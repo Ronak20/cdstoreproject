@@ -42,4 +42,8 @@ public class UserService implements IUserService {
 		return null;
 	}
 
+	public User getUser(String userId) {
+		return userDao.getUser(userId);
+	}
+
 }

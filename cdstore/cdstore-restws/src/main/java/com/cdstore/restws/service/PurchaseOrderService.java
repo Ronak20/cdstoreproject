@@ -38,11 +38,10 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 	public void save(PurchaseOrder purchaseOrder) {
 		List<PurchaseOrderItem> purchaseOrderItemList = purchaseOrder
 				.getPurchaseOrderItem();
-		
+
 		purchaseOrder.setPurchaseOrderItem(null);
 		purchaseOrderDao.save(purchaseOrder);
-		
-		
+
 		if (purchaseOrderItemList != null) {
 
 			for (PurchaseOrderItem purchaseOrderItem : purchaseOrderItemList) {
@@ -53,6 +52,12 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 			}
 
 		}
+	}
+
+	public List<PurchaseOrder> getPurchaseOrder(String userId) {
+		List<PurchaseOrder> purchaseOrderList = purchaseOrderDao
+				.getPurchaseOrder(userId);
+		return purchaseOrderList;
 	}
 
 }

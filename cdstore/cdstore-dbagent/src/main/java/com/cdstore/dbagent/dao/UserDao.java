@@ -42,4 +42,14 @@ public class UserDao implements IUserDao {
 		List<User> userList = criteria.list();
 		return userList;
 	}
+
+	@Transactional
+	public User getUser(String userId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("userId", userId));
+
+		User userList = (User) criteria.list().get(0);
+		return userList;
+	}
 }

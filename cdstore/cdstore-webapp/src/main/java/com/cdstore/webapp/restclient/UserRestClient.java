@@ -73,12 +73,26 @@ public class UserRestClient implements IUserRestClient {
 					+ authenticatedUser.toString());
 			return authenticatedUser;
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(" authenticate ");
 		return null;
 
+	}
+
+	public User getUser(String userId) {
+		System.out.println(" ========= getUser");
+		System.out.println("userId : " + userId);
+		WebTarget webTarget = this.webTarget.path("user").path("details");
+		WebTarget webTargetWithQueryParam = webTarget.queryParam("userId",
+				userId);
+		Invocation.Builder invocationBuilder = webTargetWithQueryParam
+				.request();
+		Response response = invocationBuilder.get();
+		User user = response.readEntity(User.class);
+		System.out.println("user : " + user);
+		System.out.println("getUser");
+		return user;
 	}
 
 }

@@ -13,4 +13,6 @@ public interface IUserDao {
 	void save(User user);
 
 	List<User> getUser(String userName, String password);
+
+	User getUser(String userId);
 }

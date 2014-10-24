@@ -29,4 +29,8 @@ public class UserService implements IUserService {
 		return userRestClient.authenticate(user);
 	}
 
+	public User getUser(String userId) {
+		return userRestClient.getUser(userId);
+	}
+
 }

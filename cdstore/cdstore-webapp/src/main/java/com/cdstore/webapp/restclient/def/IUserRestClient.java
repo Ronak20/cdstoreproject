@@ -6,4 +6,6 @@ public interface IUserRestClient {
 	void save(User user);
 
 	User authenticate(User user);
+	
+	User getUser(String userId);
 }
