@@ -8,6 +8,7 @@ package com.cdstore.webapp;
  */
 public class LogConstant {
 	public static final String ERROR = "Error ";
+	public static final String PARAMETER = "Parameter ";
 	public static final String RETURN = "Return ";
 	public static final String REDIRECT = "Redirected to ";
 	public static final String ENTERED = "Entered ";
