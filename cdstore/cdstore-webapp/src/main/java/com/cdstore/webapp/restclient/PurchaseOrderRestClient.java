@@ -55,7 +55,7 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 
 		try {
 			poJson = objectMapper.writeValueAsString(purchaseOrder);
-			logger.debug(LogConstant.RETURN + "poJson :" + poJson);
+			logger.debug("poJson :" + poJson);
 			Response response = webTarget.request().post(
 					Entity.entity(poJson, MediaType.APPLICATION_JSON));
 			String purchaseStatus = response.readEntity(String.class);
