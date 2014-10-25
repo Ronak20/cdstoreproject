@@ -33,9 +33,7 @@
 				</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><a href="/cdstore-webapp/CdShowServlet">Home</a></li>
-						<li class=""><a href="normal.html">Account</a></li>
-						<li class=""><a href="contact.html">Contact</a></li>
+						<li class="active"><a href="/cdstore-webapp/CdShowServlet">Home</a></li>				
 					</ul>
 					
 				</div>
@@ -62,9 +60,13 @@
 							</c:choose>
 							<c:choose>
 								<c:when test="${sessionScope.user != null}">
-								<p> Welcome <c:out value="${sessionScope.user.firstName} ${sessionScope.user.lastName}"></c:out> </p>
+								<p style="color:#3399FF"> Welcome <c:out value="${sessionScope.user.firstName} ${sessionScope.user.lastName}"></c:out> </p>
 									<strong><a href="${pageContext.request.contextPath}/logout">Logout</a></strong>
-								</c:when>				
+									<c:set var="accountUrl" value="${pageContext.request.contextPath}/userDetail?userid=${sessionScope.user.userId}"></c:set>
+								</c:when>
+								<c:otherwise>
+								<c:set var="accountUrl" value="login.jsp"></c:set>
+								</c:otherwise>				
 							</c:choose>
 					</div>
 				</div>		
@@ -150,35 +152,13 @@
 		</div>
 		<!-- Footer ------------------------------------------------------ -->
 		<hr class="soft">
+		<hr class="soft">
 		<div id="footerSection">
 			<div class="row">
 				<div class="span3">
 					<h5>ACCOUNT</h5>
-					<a href="login.html">YOUR ACCOUNT</a> <a href="login.html">PERSONAL
-						INFORMATION</a> <a href="login.html">ADDRESSES</a> <a
-						href="login.html">DISCOUNT</a> <a href="login.html">ORDER
-						HISTORY</a>
-				</div>
-				<div class="span3">
-					<h5>INFORMATION</h5>
-					<a href="contact.html">CONTACT</a> <a href="register.html">REGISTRATION</a>
-					<a href="legal_notice.html">LEGAL NOTICE</a> <a href="tac.html">TERMS
-						AND CONDITIONS</a> <a href="faq.html">FAQ</a>
-				</div>
-				<div class="span3">
-					<h5>OUR OFFERS</h5>
-					<a href="#">NEW PRODUCTS</a> <a href="#">TOP SELLERS</a> <a
-						href="special_offer.html">SPECIAL OFFERS</a> <a href="#">MANUFACTURERS</a>
-					<a href="#">SUPPLIERS</a>
-				</div>
-				<div id="socialMedia" class="span3 pull-right">
-					<h5>SOCIAL MEDIA</h5>
-					<a href="#"><img width="60" src="assets/img/facebook.png"
-						title="facebook" /></a> <a href="#"><img width="60"
-						src="assets/img/twitter.png" title="twitter" /></a> <a href="#"><img
-						width="60" src="assets/img/rss.png" title="rss" /></a> <a href="#"><img
-						width="60" src="assets/img/youtube.png" title="youtube" /></a>
-				</div>
+					<a href="${accountUrl}">YOUR ACCOUNT</a> 
+				</div>				
 			</div>
 			<hr class="soft">
 			<p class="pull-right">&copy; Elite Coderz</p>

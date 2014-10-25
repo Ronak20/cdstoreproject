@@ -34,10 +34,7 @@
                   </a>
                   <div class="nav-collapse">
                     <ul class="nav">
-					  <li class=""><a href="index.html">Home	</a></li>
-					  <li class=""><a href="special_offer.html">Specials Offer</a></li>
-					  <li class=""><a href="normal.html">Delivery</a></li>
-					  <li class=""><a href="contact.html">Contact</a></li>
+					  <li class=""><a href="${pageContext.request.contextPath}/CdShowServlet">Home</a></li>					  
 					</ul>
                   </div><!-- /.nav-collapse -->
                 </div>
@@ -52,10 +49,17 @@
 	<a href="index.html"><img src="assets/img/logo.png" alt="Bootsshop"/></a>
 
 <div class="pull-right"> <br/>
+<c:choose>
+	<c:when test="${sessionScope.user != null}">	
+	<c:set var="accountUrl" value="${pageContext.request.contextPath}/userDetail?userid=${sessionScope.user.userId}"></c:set>
+	</c:when>
+	<c:otherwise>
+	<c:set var="accountUrl" value="login.jsp"></c:set>
+	</c:otherwise>				
+	</c:choose>
+	<div class="span3">	
 	<input type="submit" class="badge-warning btn-large" name="confirmOrder" value="Confirm Order" onclick="">
-	<input type="submit" class="badge-warning btn-large cancel" name = "cancelOrder"value="Cancel order">
-	<a href="#"> <span class="btn btn-mini btn-warning"> <i class="icon-shopping-cart icon-white"></i> [ <c:out value="${cartItems}"></c:out> ] </span> </a>
-	<a href="#"><span class="btn btn-mini active">$${totalPrice}</span></a> 
+	<input type="submit" class="badge-warning btn-large cancel" name = "cancelOrder"value="Cancel order">		
 </div>
 </div>
 </div>
@@ -152,44 +156,17 @@
 		 </div>
               </div>
 <!-- Footer ------------------------------------------------------ -->
-<hr class="soft">
-<div  id="footerSection">
-	<div class="row">
-		<div class="span3">
-			<h5>ACCOUNT</h6>
-			<a href="login.html">YOUR ACCOUNT</a>
-			<a href="login.html">PERSONAL INFORMATION</a> 
-			<a href="login.html">ADDRESSES</a> 
-			<a href="login.html">DISCOUNT</a>  
-			<a href="login.html">ORDER HISTORY</a>
-		 </div>
-		<div class="span3">
-			<h5>INFORMATION</h5>
-			<a href="contact.html">CONTACT</a>  
-			<a href="register.html">REGISTRATION</a>  
-			<a href="legal_notice.html">LEGAL NOTICE</a>  
-			<a href="tac.html">TERMS AND CONDITIONS</a> 
-			<a href="faq.html">FAQ</a>
-		 </div>
-		<div class="span3">
-			<h5>OUR OFFERS</h5>
-			<a href="#">NEW PRODUCTS</a> 
-			<a href="#">TOP SELLERS</a>  
-			<a href="special_offer.html">SPECIAL OFFERS</a>  
-			<a href="#">MANUFACTURERS</a> 
-			<a href="#">SUPPLIERS</a> 
-		 </div>
-		<div id="socialMedia" class="span3 pull-right">
-			<h5>SOCIAL MEDIA </h5>
-			<a href="#"><img width="60" src="assets/img/facebook.png" title="facebook"/></a>
-			<a href="#"><img width="60" src="assets/img/twitter.png" title="twitter"/></a>
-			<a href="#"><img width="60" src="assets/img/rss.png" title="rss"/></a>
-			<a href="#"><img width="60" src="assets/img/youtube.png" title="youtube"/></a>
-		 </div> 
-	 </div>
-	 <hr class="soft">
-	<p class="pull-right">&copy; Elite Coderz</p>
-	</div><!-- /footer -->
+		<hr class="soft">
+		<div id="footerSection">
+			<div class="row">
+				<div class="span3">
+					<h5>ACCOUNT</h5>
+					<a href="${accountUrl}">YOUR ACCOUNT</a> 
+				</div>				
+			</div>
+			<hr class="soft">
+			<p class="pull-right">&copy; Elite Coderz</p>
+		</div>
 </div><!-- /container -->
 </form>
 

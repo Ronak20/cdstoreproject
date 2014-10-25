@@ -19,6 +19,24 @@
 	rel="stylesheet" />
 </head>
 <body>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+			<div class="container">
+				 <a	data-target="#sidebar" data-toggle="collapse"
+					class="btn btn-navbar"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li class="active"><a href="${pageContext.request.contextPath}/CdShowServlet">Home</a></li>				
+					</ul>
+					
+				</div>
+				<!-- /.nav-collapse -->
+			</div>
+		</div>
+		<!-- /navbar-inner -->
+	</div>
 	<div id="mainBody" class="container">
 	<div class="span9">    
 	<h3> Login</h3>	

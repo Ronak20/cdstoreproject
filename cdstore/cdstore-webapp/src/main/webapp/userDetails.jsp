@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>CDs by category</title>
+<title>User Details</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -34,8 +34,6 @@
 				<div class="nav-collapse">
 					<ul class="nav">
 						<li class="active"><a href="/cdstore-webapp/CdShowServlet">Home</a></li>
-						<li class=""><a href="normal.html">Account</a></li>
-						<li class=""><a href="contact.html">Contact</a></li>
 					</ul>
 				</div>
 				<!-- /.nav-collapse -->
@@ -99,7 +97,11 @@
                 </div>	
 			</c:forEach>
                   </div>
-			
+			<hr class="soft">
+		<div id="footerSection">			
+			<hr class="soft">
+			<p class="pull-right">&copy; Elite Coderz</p>
+		</div>
 		 </div>
 	</div>
 	</div> <!-- container ends -->

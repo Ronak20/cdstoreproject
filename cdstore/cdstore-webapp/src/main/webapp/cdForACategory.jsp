@@ -68,6 +68,7 @@
 								<c:set var="accountUrl" value="login.jsp"></c:set>
 								</c:otherwise>				
 							</c:choose>
+							<div class="row">				
 					</div>
 				</div>		
 			</div>
