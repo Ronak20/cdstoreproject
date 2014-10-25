@@ -40,9 +40,9 @@ public class CdRestClientTest extends TestCase {
 	public void testGetCds() throws InternalServerException, NotFoundException,
 			InvalidParameterException {
 		List<String> cdIds = new ArrayList<String>(0);
-		cdIds.add("1");
-		cdIds.add("2");
-		cdIds.add("3");
+		cdIds.add("cd001");
+		cdIds.add("cd002");
+		cdIds.add("cd003");
 
 		List<CD> cdList = cdRestClient.getCds(cdIds);
 

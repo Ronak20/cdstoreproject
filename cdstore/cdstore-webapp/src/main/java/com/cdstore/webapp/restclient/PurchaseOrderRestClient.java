@@ -18,7 +18,6 @@ import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 
 /**
  * implementation of IPurchaseOrderRestClient
