@@ -10,6 +10,12 @@ import com.cdstore.webapp.restclient.CdRestClient;
 import com.cdstore.webapp.restclient.def.ICdRestClient;
 import com.cdstore.webapp.service.def.ICdService;
 
+/**
+ * Implementation of ICdService
+ * 
+ * @author Ronak
+ *
+ */
 public class CdService implements ICdService {
 
 	private ICdRestClient iCdRestClient;

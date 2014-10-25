@@ -5,6 +5,12 @@ import com.cdstore.webapp.restclient.UserRestClient;
 import com.cdstore.webapp.restclient.def.IUserRestClient;
 import com.cdstore.webapp.service.def.IUserService;
 
+/**
+ * Implementation of IUserService
+ * 
+ * @author Ronak
+ *
+ */
 public class UserService implements IUserService {
 
 	private IUserRestClient userRestClient;
