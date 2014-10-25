@@ -121,7 +121,7 @@ public class PurchaseOrder {
 	@Override
 	public String toString() {
 		return "PurchaseOrder [purchaseOrderId=" + purchaseOrderId
-				+ ", status=" + status + ", user=" + user
+				+ ", status=" + status 
 				+ ", purchaseOrderItem=" + purchaseOrderItem + "]";
 	}
 

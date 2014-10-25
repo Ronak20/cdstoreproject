@@ -16,8 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "poitem")
-@AssociationOverrides({
-		@AssociationOverride(name = "poId.purchaseOrder", joinColumns = @JoinColumn(name = "poid")),
+@AssociationOverrides({ @AssociationOverride(name = "poId.purchaseOrder", joinColumns = @JoinColumn(name = "poid")),
 		@AssociationOverride(name = "poId.cd", joinColumns = @JoinColumn(name = "cdid")) })
 public class PurchaseOrderItem {
 
@@ -76,7 +75,7 @@ public class PurchaseOrderItem {
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderItem [poId=" + poId + ", price=" + price + "]";
+		return "PurchaseOrderItem" + " price=" + price + "]";
 	}
 
 }

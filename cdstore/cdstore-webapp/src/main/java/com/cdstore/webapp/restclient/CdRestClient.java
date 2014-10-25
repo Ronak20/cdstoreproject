@@ -58,17 +58,21 @@ public class CdRestClient implements ICdRestClient {
 		switch (response.getStatus()) {
 		case 500:
 			throw new InternalServerException("Internal server error");
+			
 		case 404:
 			throw new NotFoundException("CD not found");
+			
 		case 200:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		default:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		}
 
-		logger.debug(LogConstant.RETURN + "cdList :" + cdList);
+		//logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 		logger.info(LogConstant.EXITED + "getAll");
 		return cdList;
 	}
@@ -91,9 +95,11 @@ public class CdRestClient implements ICdRestClient {
 		case 200:
 			categoryList = response.readEntity(new GenericType<List<String>>() {
 			});
+			break;
 		default:
 			categoryList = response.readEntity(new GenericType<List<String>>() {
 			});
+			break;
 		}
 
 		logger.debug(LogConstant.RETURN + "categoryList :" + categoryList);
@@ -126,9 +132,11 @@ public class CdRestClient implements ICdRestClient {
 		case 200:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		default:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		}
 
 		logger.debug(LogConstant.RETURN + "cdList :" + cdList);
@@ -158,11 +166,13 @@ public class CdRestClient implements ICdRestClient {
 		case 200:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		default:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
+			break;
 		}
-		logger.debug(LogConstant.RETURN + "cdList :" + cdList);
+		//logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 		logger.info(LogConstant.EXITED + "getCds");
 		return cdList;
 	}

@@ -169,7 +169,7 @@ public class Address {
 	public String toString() {
 		return "Address [addressId=" + addressId + ", street=" + street
 				+ ", province=" + province + ", country=" + country + ", zip="
-				+ zip + ", phone=" + phone + ", userList=" + userList + "]";
+				+ zip + ", phone=" + phone + "]";
 	}
 
 }

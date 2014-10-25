@@ -60,6 +60,12 @@
 									<strong><label class="badge-warning btn" id="selectCdWarningLabel">Please select at least one Cd before checking out!</label></strong>
 								</c:when>				
 							</c:choose>
+							<c:choose>
+								<c:when test="${sessionScope.user != null}">
+								<p> Welcome <c:out value="${sessionScope.user.firstName} ${sessionScope.user.lastName}"></c:out> </p>
+									<strong><a href="${pageContext.request.contextPath}/logout">Logout</a></strong>
+								</c:when>				
+							</c:choose>
 					</div>
 				</div>		
 			</div>

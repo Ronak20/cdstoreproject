@@ -45,7 +45,7 @@ public class CdDao implements ICdDao {
 		logger.info(LogConstant.ENTERED + "getAllCD");
 		List<CD> cdDriveList = sessionFactory.getCurrentSession()
 				.createCriteria(CD.class).list();
-		logger.debug(LogConstant.RETURN + "cdDriveList :" + cdDriveList);
+		//logger.debug(LogConstant.RETURN + "cdDriveList :" + cdDriveList);
 		logger.info(LogConstant.EXITED + "getAllCD");
 		return cdDriveList;
 	}
@@ -79,7 +79,7 @@ public class CdDao implements ICdDao {
 			Query query = sessionFactory.getCurrentSession().createQuery(hql);
 			query.setParameter("categories", categoryName);
 			List<CD> cdList = (List<CD>) query.list();
-			logger.debug(LogConstant.RETURN + "cdList :" + cdList);
+			//logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 			logger.info(LogConstant.EXITED + "getCdsForACategory");
 			return cdList;
 		} catch (Exception e) {

@@ -10,7 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+
 import com.cdstore.model.CD;
+import com.cdstore.webapp.LogConstant;
 import com.cdstore.webapp.exception.InternalServerException;
 import com.cdstore.webapp.exception.InvalidParameterException;
 import com.cdstore.webapp.exception.NotFoundException;
@@ -23,6 +29,7 @@ import com.cdstore.webapp.service.def.ICdService;
 @WebServlet("/CdShowServlet")
 public class CDShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger logger = LogManager.getLogger(CDShowServlet.class);
 
 	private ICdService iCdService;
 
@@ -45,6 +52,7 @@ public class CDShowServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
+			
 			// look if user had already selected some cds. This may happen in a
 			// case
 			// when user goes to Cds by categories web-page
@@ -94,13 +102,17 @@ public class CDShowServlet extends HttpServlet {
 					.include(request, response);
 		} catch (InternalServerException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "getCdCategories");
+			
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "getCdCategories");
 		} catch (InvalidParameterException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "getCdCategories");
 		}
 	}
 
