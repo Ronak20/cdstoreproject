@@ -28,8 +28,8 @@ public class UserRestClientTest extends TestCase {
 
 	public void testAuthenticateUser() {
 		User user = new User();
-		user.setUsername("a");
-		user.setPassword("a");
+		user.setUsername("jon");
+		user.setPassword("6cb570acdab0e0bfc8e3dcb7bb4edf");
 
 		userRestClient.authenticate(user);
 

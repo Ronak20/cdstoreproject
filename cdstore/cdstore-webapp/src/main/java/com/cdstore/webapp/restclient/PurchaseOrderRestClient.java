@@ -15,8 +15,10 @@ import com.cdstore.webapp.AppConstant;
 import com.cdstore.webapp.CdStoreRestClientConfig;
 import com.cdstore.webapp.LogConstant;
 import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 /**
  * implementation of IPurchaseOrderRestClient
@@ -47,20 +49,20 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 	public String purchase(PurchaseOrder purchaseOrder) {
 		logger.info(LogConstant.ENTERED + "purchase");
 		logger.info(LogConstant.PARAMETER + "purchaseOrder :" + purchaseOrder);
-		Invocation.Builder invocationBuilder = webTarget
-				.request(MediaType.APPLICATION_JSON);
+		Invocation.Builder invocationBuilder = webTarget.path("purchase")
+				.request(MediaType.TEXT_PLAIN);
 
 		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.setSerializationInclusion(Include.NON_NULL);
 		String poJson;
 
 		try {
 			poJson = objectMapper.writeValueAsString(purchaseOrder);
 			logger.debug("poJson :" + poJson);
-			Response response = webTarget.request().post(
-					Entity.entity(poJson, MediaType.APPLICATION_JSON));
+			Response response = invocationBuilder.post(Entity.entity(poJson,
+					MediaType.APPLICATION_JSON));
 			String purchaseStatus = response.readEntity(String.class);
-			System.out.println(" po saved:  "
-					+ purchaseOrder.getPurchaseOrderId());
+			logger.debug(" po saved:  " + purchaseOrder.getPurchaseOrderId());
 			logger.debug(LogConstant.RETURN + "cdList :" + purchaseStatus);
 			logger.info(LogConstant.EXITED + "getAllCDsForCategory");
 			return purchaseStatus;

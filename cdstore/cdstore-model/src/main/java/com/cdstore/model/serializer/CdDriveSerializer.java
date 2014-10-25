@@ -21,10 +21,27 @@ public class CdDriveSerializer extends JsonSerializer<CD> {
 		if (cd != null) {
 			jg.writeStartObject();
 
-			jg.writeStringField("cdId", cd.getCdId());
-			jg.writeStringField("title", cd.getTitle());
-			jg.writeNumberField("price", cd.getPrice());
-			jg.writeStringField("category", cd.getCategory());
+			String cdId = cd.getCdId();
+
+			if (cdId != null) {
+				jg.writeStringField("cdId", cd.getCdId());
+			}
+
+			String title = cd.getTitle();
+			if (title != null) {
+				jg.writeStringField("title", cd.getTitle());
+			}
+
+			Integer price = cd.getPrice();
+
+			if (price != null) {
+				jg.writeNumberField("price", cd.getPrice());
+			}
+
+			String category = cd.getCategory();
+			if (category != null) {
+				jg.writeStringField("category", cd.getCategory());
+			}
 
 			jg.writeEndObject();
 		}
