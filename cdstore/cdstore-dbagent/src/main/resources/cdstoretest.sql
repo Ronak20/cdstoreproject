@@ -132,3 +132,56 @@ CREATE INDEX `cdid` ON `cdstoretest`.`visitevent` (`cdid` ASC);
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Table `cdstore`.`cd`
+-- -----------------------------------------------------
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd001', 'Johnny Cash Greatest Hits', 1599, 'COUNTRY');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd002','Willy Nelson Greatest', 1599, 'COUNTRY');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd003','Patsy Cline Im So Lonely' ,1599,'COUNTRY');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd004', 'Tragically Hip Fully Completely', 2000, 'ROCK');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd005', 'Beatles White Album', 2000, 'ROCK');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd006', 'Rolling Stones Forty Licks', 2000, 'ROCK');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd007', 'Madonna Greatest Hits', 1799, 'POP');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd008', 'Alannis Morissette Jagged Little Pill', 1799, 'POP');
+INSERT INTO CD (cdid, title, price, category) VALUES ('cd009', 'Video Killed the Radio Star', 1799, 'POP');
+
+--
+-- Dumping data for table `address`
+--
+
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'123 King adward','ON','Canada','K1E 6T5','613-123-4567');
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (9,'jon','jon','jon','6cb570acdab0e0bfc8e3dcb7bb4edf',1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `po`
+--
+
+LOCK TABLES `po` WRITE;
+/*!40000 ALTER TABLE `po` DISABLE KEYS */;
+INSERT INTO `po` VALUES (2,'ORDERED',9);
+/*!40000 ALTER TABLE `po` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `poitem`
+--
+
+LOCK TABLES `poitem` WRITE;
+/*!40000 ALTER TABLE `poitem` DISABLE KEYS */;
+INSERT INTO `poitem` VALUES (2,'cd001',100),(2,'cd002',100),(2,'cd003',100);
+/*!40000 ALTER TABLE `poitem` ENABLE KEYS */;
+UNLOCK TABLES;

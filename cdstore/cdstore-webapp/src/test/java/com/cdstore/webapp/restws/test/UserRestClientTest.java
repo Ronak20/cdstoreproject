@@ -39,7 +39,7 @@ public class UserRestClientTest extends TestCase {
 
 	public void testGetUserDetails() {
 
-		User user = userRestClient.getUser("1");
+		User user = userRestClient.getUser("9");
 
 		Assert.assertNotNull(user.getFirstName());
 		Assert.assertNotNull(user.getLastName());
