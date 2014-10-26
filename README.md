@@ -20,6 +20,9 @@ go to cdstore-restws folder
 in com.cdstore.restws open Start.java file
 right click on file run as Java application
 
+cdstore-webapp
+==============
+
 this will start deploy jersey web service in grizzly container.
 It can be accesed at http://localhost:9090
 
