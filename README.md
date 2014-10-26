@@ -37,7 +37,7 @@ database setup
 
 database sql is in cdstore-dbagent's resources folder.
 
-database configuration are in dbagent-context.xml from line 35 to 48
+database configuration are in dbagent-context.xml from line 35 to 48.you can change database name and credential there.
 
 test sql
 ==============
