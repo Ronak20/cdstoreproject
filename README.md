@@ -9,9 +9,10 @@ type in command
 
 mvn clean install -DskipTests=true
 
-this command will build all source file and jar
+this command will build all source file and jar.jar is available in target folder of each individual project.
 
-
+cdstore-restws
+==============
 To run web service
 
 go to cdstore-restws folder
@@ -25,3 +26,17 @@ It can be accesed at http://localhost:9090
 to run web application
 
 take war file from target folder and deploy using tomcat manager tool
+
+database setup
+==============
+
+database sql is in cdstore-dbagent's resources folder.
+
+database configuration are in dbagent-context.xml from line 35 to 48
+
+test sql
+==============
+
+for testing test sql is available in cdstore-dbagent project in resources folder.
+
+Execution of this sql will create cdstoretest database
