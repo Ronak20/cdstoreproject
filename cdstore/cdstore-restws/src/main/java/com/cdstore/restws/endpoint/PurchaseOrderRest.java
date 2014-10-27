@@ -35,7 +35,7 @@ public class PurchaseOrderRest implements IPurchaseOrderRest {
 		this.iPurchaseOrderService = iPurchaseOrderService;
 	}
 
-	private static int PURCHASE_COUNT = 0;
+	private static int PURCHASE_COUNT = 1;
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -47,7 +47,7 @@ public class PurchaseOrderRest implements IPurchaseOrderRest {
 				PURCHASE_COUNT++;
 				return "success";
 			} else {
-				PURCHASE_COUNT = 0;
+				PURCHASE_COUNT = 1;
 				return "creditcarderror";
 			}
 		} catch (Exception e) {
