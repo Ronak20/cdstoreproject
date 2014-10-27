@@ -3,6 +3,9 @@ package com.cdstore.webapp;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.filter.LoggingFilter;
+
 /**
  * Configures rest client
  * 
@@ -17,7 +20,10 @@ public class CdStoreRestClientConfig {
 	 * @return rest client
 	 */
 	public static Client getRestClient() {
-		Client client = ClientBuilder.newClient();
+		ClientConfig config = new ClientConfig();
+		config.register(new LoggingFilter());
+		
+		Client client = ClientBuilder.newClient(config);
 		return client;
 	}
 

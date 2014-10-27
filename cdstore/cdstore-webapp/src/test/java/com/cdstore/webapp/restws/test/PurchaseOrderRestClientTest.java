@@ -3,6 +3,7 @@ package com.cdstore.webapp.restws.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import com.cdstore.model.Address;
@@ -25,13 +26,12 @@ public class PurchaseOrderRestClientTest extends TestCase {
 	public void testPurchase() {
 		User user = new User();
 		user.setUserId("9");
-		/*user.setFirstName("Ronak");
-		user.setLastName("Chaudhari");
-		user.setPassword("abcd");
-		user.setUsername("Ronak");*/
+		/*
+		 * user.setFirstName("Ronak"); user.setLastName("Chaudhari");
+		 * user.setPassword("abcd"); user.setUsername("Ronak");
+		 */
 		user.setPurchaseOrderList(null);
-		
-		
+
 		Address address = new Address();
 		address.setAddressId("1");
 		address.setCountry("Canada");
@@ -85,6 +85,7 @@ public class PurchaseOrderRestClientTest extends TestCase {
 
 		purchaseOrder.setPurchaseOrderItem(poItemList);
 
-		purchaseOrderRestClient.purchase(purchaseOrder);
+		String purchaseStatus = purchaseOrderRestClient.purchase(purchaseOrder);
+		Assert.assertEquals("success", purchaseStatus);
 	}
 }

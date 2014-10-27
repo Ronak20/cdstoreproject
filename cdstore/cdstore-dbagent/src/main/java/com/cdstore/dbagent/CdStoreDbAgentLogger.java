@@ -1,4 +1,4 @@
-package com.cdstore.dbagent;
+/*package com.cdstore.dbagent;
 
 import java.util.logging.Logger;
 
@@ -8,12 +8,12 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
-/**
+*//**
  * Aspect for logging in db agent
  * 
  * @author Ronak
  *
- */
+ *//*
 @Aspect
 public class CdStoreDbAgentLogger {
 
@@ -41,4 +41,4 @@ public class CdStoreDbAgentLogger {
 	public void logExceptions(JoinPoint joinPoint) {
 		log.severe("Exception thrown in Method : " + joinPoint.toString());
 	}
-}
+}*/

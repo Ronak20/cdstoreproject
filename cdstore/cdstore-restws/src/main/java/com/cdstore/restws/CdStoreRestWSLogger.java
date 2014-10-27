@@ -1,7 +1,7 @@
 package com.cdstore.restws;
 
-import java.util.logging.Logger;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -17,28 +17,32 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class CdStoreRestWSLogger {
 
-	private Logger log = Logger.getLogger(CdStoreRestWSLogger.class.getName());
+	// private Logger log =
+	// Logger.getLogger(CdStoreRestWSLogger.class.getName());
+	private static Logger logger = LogManager
+			.getLogger(CdStoreRestWSLogger.class);
 
 	@Around("execution(* com.cdstore.restws..*.*(..))")
 	public Object restAroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
-		log.info("Before invoking " + proceedingJoinPoint.getSignature()
-				+ " method");
+		logger.info(LogConstant.ENTERED + proceedingJoinPoint.getSignature()
+				+ " method ");
+		logger.info(LogConstant.PARAMETER + proceedingJoinPoint.getArgs().toString());
+
 		Object value = null;
 		try {
 			value = proceedingJoinPoint.proceed();
 		} catch (Throwable e) {
-			e.printStackTrace();
+			logger.error(LogConstant.ERROR + "Exception thrown in Method : "
+					+ proceedingJoinPoint.toString() + e.getMessage(), e);
 		}
-		log.info("After invoking "
-				+ proceedingJoinPoint.getSignature().getName() + " method.");// Return
-																				// value="
-																				// +
-																				// value);
+		logger.info(LogConstant.EXITED
+				+ proceedingJoinPoint.getSignature().getName() + " method.");
+		// Return value=" + value);
 		return value;
 	}
 
 	@AfterThrowing("execution(* com.cdstore.restws..*.*(..))")
 	public void logExceptions(JoinPoint joinPoint) {
-		log.severe("Exception thrown in Method : " + joinPoint.toString());
+		logger.fatal("Exception thrown in Method : " + joinPoint.toString());
 	}
 }

@@ -4,8 +4,8 @@
 		<Console name="STDOUT" target="SYSTEM_OUT">
 			<PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n" />
 		</Console>
-		<RollingFile name="RollingFile" fileName="logs/cdstore-webapp.log"
-			filePattern="logs/cdstore-webapp-log-%d{MM-dd-yyyy-HH}-%i.log.gz">
+		<RollingFile name="RollingFile" fileName="logs/cdstore-restws.log"
+			filePattern="logs/cdstore-restws-log-%d{MM-dd-yyyy-HH}-%i.log.gz">
 			<PatternLayout>
 				<Pattern>%d %-5p [%t] %C{2} (%F:%L) - %m%n</Pattern>
 			</PatternLayout>

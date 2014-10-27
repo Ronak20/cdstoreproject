@@ -1,4 +1,4 @@
-package com.cdstore.dbagent;
+package com.cdstore.restws;
 
 /**
  * Constant for logging
@@ -13,4 +13,6 @@ public class LogConstant {
 	public static final String REDIRECT = "Redirected to ";
 	public static final String ENTERED = "Entered ";
 	public static final String EXITED = "Exited ";
+	public static final String POST_RECEIVED = "Post Received";
+	public static final String GET_RECEIVED = "Get Received";
 }

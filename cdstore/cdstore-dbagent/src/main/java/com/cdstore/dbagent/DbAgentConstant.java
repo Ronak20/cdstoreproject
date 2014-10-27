@@ -1,6 +1,8 @@
 package com.cdstore.dbagent;
 
 /**
+ * This is file is not used anymore
+ * Configure from dbagent-context.xml
  * Contains configuration details
  * 
  * @author Ronak

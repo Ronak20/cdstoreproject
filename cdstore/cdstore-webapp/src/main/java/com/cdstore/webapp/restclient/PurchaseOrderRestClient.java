@@ -62,7 +62,7 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 					MediaType.APPLICATION_JSON));
 			String purchaseStatus = response.readEntity(String.class);
 			logger.debug(" po saved:  " + purchaseOrder.getPurchaseOrderId());
-			logger.debug(LogConstant.RETURN + "cdList :" + purchaseStatus);
+			logger.debug(LogConstant.RETURN + "purchaseStatus :" + purchaseStatus);
 			logger.info(LogConstant.EXITED + "getAllCDsForCategory");
 			return purchaseStatus;
 		} catch (JsonProcessingException e) {

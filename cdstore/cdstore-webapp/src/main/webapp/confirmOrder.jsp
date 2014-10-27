@@ -192,8 +192,9 @@
     <script src="assets/js/bootstrap-affix.js"></script>
     <script src="assets/js/jquery.lightbox-0.5.js"></script>
 	<script src="assets/js/bootsshoptgl.js"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
-	 <script type="text/javascript">
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
+	
+	<script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox();
     });

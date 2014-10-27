@@ -14,11 +14,11 @@
 
 	<tx:annotation-driven />
 
-	<aop:aspectj-autoproxy>
+	<!-- <aop:aspectj-autoproxy>
 		<aop:include name="dbAgentLogger" />
 	</aop:aspectj-autoproxy>
 
-	<bean id="dbAgentLogger" class="com.cdstore.dbagent.CdStoreDbAgentLogger" />
+	<bean id="dbAgentLogger" class="com.cdstore.dbagent.CdStoreDbAgentLogger" /> -->
 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">

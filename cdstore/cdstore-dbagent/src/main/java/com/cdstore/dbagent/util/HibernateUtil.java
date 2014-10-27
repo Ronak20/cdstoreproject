@@ -16,6 +16,7 @@ import com.cdstore.model.User;
 import com.cdstore.model.VisitEvent;
 
 /**
+ * This is file is not used anymore
  * Provides session factory
  * 
  * @author Ronak

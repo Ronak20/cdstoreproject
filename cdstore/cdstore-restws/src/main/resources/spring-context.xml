@@ -24,12 +24,7 @@
 
 	<bean id="cdService" class="com.cdstore.restws.service.CdService"></bean>
 	<bean id="purchaseOrderService" class="com.cdstore.restws.service.PurchaseOrderService"></bean>
-	<!-- <bean id="purchaseOrderItemService" class="com.cdstore.restws.service.PurchaseOrderItemService"></bean>
-	 -->
 	<bean id="userService" class="com.cdstore.restws.service.UserService"></bean>
 	<bean id="addressService" class="com.cdstore.restws.service.AddressService"></bean>
-
-	<!-- <bean id="cdDao" class="com.cdstore.dbagent.dao.CdDao"></bean> <bean 
-		id="cdService" class="com.cdstore.restws.service.CdService"></bean> -->
 
 </beans>
