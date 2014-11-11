@@ -30,12 +30,28 @@ public interface ICdDao {
 	/**
 	 * list of cd for specified category
 	 * 
-	 * @param categoryName name of category
+	 * @param categoryName
+	 *            name of category
 	 * @return list of cd of specified category
 	 */
 	List<CD> getCdsForACategory(String categoryName);
 
 	Map<String, List<CD>> getCdMap();
 
+	/**
+	 * list of cds to get details
+	 * 
+	 * @param cdIds
+	 *            list of cd ids
+	 * @return cd details by ids
+	 */
 	List<CD> getCds(List<String> cdIds);
+
+	/**
+	 * adds cd
+	 * 
+	 * @param cd
+	 *            to add
+	 */
+	void save(CD cd);
 }

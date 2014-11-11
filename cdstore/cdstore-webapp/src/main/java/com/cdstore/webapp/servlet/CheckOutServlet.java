@@ -48,8 +48,6 @@ public class CheckOutServlet extends HttpServlet {
 	 * Default constructor.
 	 */
 	public CheckOutServlet() {
-		purchaseOrderService = new PurchaseOrderService();
-		iCdService = new CdService();
 	}
 
 	/**
@@ -71,6 +69,13 @@ public class CheckOutServlet extends HttpServlet {
 		User loggedUser = (User) request.getSession().getAttribute("user");
 		// String[] checkedIdStrings =
 		// request.getParameterValues("addToCartCheckBox");
+		
+		setiCdService(new CdService(loggedUser.getUsername(),
+				loggedUser.getPassword()));
+		
+		purchaseOrderService = new PurchaseOrderService(loggedUser.getUsername(),
+				loggedUser.getPassword());
+		
 		PurchaseOrder poOrder = new PurchaseOrder();
 		List<PurchaseOrderItem> poItemList = new ArrayList<PurchaseOrderItem>();
 		ArrayList<String> interimObj = (ArrayList<String>) request.getSession().getAttribute("selectedcds");

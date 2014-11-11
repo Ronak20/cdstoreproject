@@ -3,6 +3,7 @@ package com.cdstore.webapp.restclient;
 import java.util.List;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -20,6 +21,8 @@ import com.cdstore.webapp.exception.InternalServerException;
 import com.cdstore.webapp.exception.InvalidParameterException;
 import com.cdstore.webapp.exception.NotFoundException;
 import com.cdstore.webapp.restclient.def.ICdRestClient;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * implementation of ICdRestClient
@@ -34,7 +37,14 @@ public class CdRestClient implements ICdRestClient {
 	private static Logger logger = LogManager.getLogger(CdRestClient.class);
 
 	public CdRestClient() {
-		setRestClient(CdStoreRestClientConfig.getRestClient());
+		CdStoreRestClientConfig cdStoreRestClientConfig = new CdStoreRestClientConfig();
+		setRestClient(cdStoreRestClientConfig.getRestClient());
+		webTarget = restClient.target(AppConstant.REST_URL);
+	}
+
+	public CdRestClient(String username, String password) {
+		CdStoreRestClientConfig cdStoreRestClientConfig = new CdStoreRestClientConfig();
+		setRestClient(cdStoreRestClientConfig.getRestClient(username, password));
 		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 
@@ -58,10 +68,10 @@ public class CdRestClient implements ICdRestClient {
 		switch (response.getStatus()) {
 		case 500:
 			throw new InternalServerException("Internal server error");
-			
+
 		case 404:
 			throw new NotFoundException("CD not found");
-			
+
 		case 200:
 			cdList = response.readEntity(new GenericType<List<CD>>() {
 			});
@@ -72,7 +82,7 @@ public class CdRestClient implements ICdRestClient {
 			break;
 		}
 
-		//logger.debug(LogConstant.RETURN + "cdList :" + cdList);
+		// logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 		logger.info(LogConstant.EXITED + "getAll");
 		return cdList;
 	}
@@ -172,8 +182,30 @@ public class CdRestClient implements ICdRestClient {
 			});
 			break;
 		}
-		//logger.debug(LogConstant.RETURN + "cdList :" + cdList);
+		// logger.debug(LogConstant.RETURN + "cdList :" + cdList);
 		logger.info(LogConstant.EXITED + "getCds");
 		return cdList;
+	}
+
+	public void save(CD cd) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "cd :" + cd);
+		WebTarget webTarget = this.webTarget.path("cddrive");
+		Invocation.Builder invocationBuilder = webTarget
+				.request(MediaType.APPLICATION_JSON);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String cdJson;
+
+		try {
+			cdJson = objectMapper.writeValueAsString(cd);
+			logger.debug("cdJson :" + cdJson);
+			Response response = webTarget.request().post(
+					Entity.entity(cdJson, MediaType.APPLICATION_JSON));
+			logger.info(LogConstant.EXITED + "save");
+		} catch (JsonProcessingException e) {
+			logger.error(e.getMessage(), e);
+			logger.info(LogConstant.EXITED + "save");
+		}
 	}
 }

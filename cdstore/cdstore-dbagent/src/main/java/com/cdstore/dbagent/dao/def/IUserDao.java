@@ -35,4 +35,13 @@ public interface IUserDao {
 	 * @return user
 	 */
 	User getUser(String userId);
+
+	/**
+	 * Retrieves user using user name
+	 * 
+	 * @param userName
+	 *            user name
+	 * @return user
+	 */
+	User getUserByUsername(String userName);
 }

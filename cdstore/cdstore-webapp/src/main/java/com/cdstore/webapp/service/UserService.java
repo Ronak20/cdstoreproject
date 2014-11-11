@@ -19,6 +19,10 @@ public class UserService implements IUserService {
 		setUserRestClient(new UserRestClient());
 	}
 
+	public UserService(String username, String password) {
+		setUserRestClient(new UserRestClient(username, password));
+	}
+
 	public IUserRestClient getUserRestClient() {
 		return userRestClient;
 	}

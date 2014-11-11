@@ -32,8 +32,9 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 	private static Logger logger = LogManager
 			.getLogger(PurchaseOrderRestClient.class);
 
-	public PurchaseOrderRestClient() {
-		setRestClient(CdStoreRestClientConfig.getRestClient());
+	public PurchaseOrderRestClient(String username, String password) {
+		CdStoreRestClientConfig cdStoreRestClientConfig = new CdStoreRestClientConfig();
+		setRestClient(cdStoreRestClientConfig.getRestClient(username, password));
 		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 
@@ -62,7 +63,8 @@ public class PurchaseOrderRestClient implements IPurchaseOrderRestClient {
 					MediaType.APPLICATION_JSON));
 			String purchaseStatus = response.readEntity(String.class);
 			logger.debug(" po saved:  " + purchaseOrder.getPurchaseOrderId());
-			logger.debug(LogConstant.RETURN + "purchaseStatus :" + purchaseStatus);
+			logger.debug(LogConstant.RETURN + "purchaseStatus :"
+					+ purchaseStatus);
 			logger.info(LogConstant.EXITED + "getAllCDsForCategory");
 			return purchaseStatus;
 		} catch (JsonProcessingException e) {

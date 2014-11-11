@@ -48,6 +48,7 @@ public class CdServlet extends HttpServlet {
 
 		List<CD> cdDriveList;
 		try {
+			
 			cdDriveList = iCdService.getAll();
 
 			request.setAttribute("cdDriveList", cdDriveList);

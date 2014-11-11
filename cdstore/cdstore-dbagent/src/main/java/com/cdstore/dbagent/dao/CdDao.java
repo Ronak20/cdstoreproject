@@ -141,4 +141,12 @@ public class CdDao implements ICdDao {
 
 	}
 
+	@Transactional
+	public void save(CD cd) {
+		logger.info(LogConstant.ENTERED + "save");
+		logger.info(LogConstant.PARAMETER + "cd :" + cd);
+		sessionFactory.getCurrentSession().save(cd);
+		logger.info(LogConstant.EXITED + "save");
+	}
+
 }

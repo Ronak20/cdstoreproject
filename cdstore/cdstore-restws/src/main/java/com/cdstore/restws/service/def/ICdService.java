@@ -51,4 +51,12 @@ public interface ICdService {
 	 * @return list of cd for cd ids
 	 */
 	List<CD> getCds(List<String> cdIds) throws Exception;
+
+	/**
+	 * saves cd
+	 * 
+	 * @param cd
+	 *            to add
+	 */
+	void save(CD cd);
 }

@@ -40,8 +40,6 @@ public class PlaceOrderServlet extends HttpServlet {
 	private IUserService iUserService;
 
 	public PlaceOrderServlet() {
-		purchaseOrderService = new PurchaseOrderService();
-		iCdService = new CdService();
 		iUserService = new UserService();
 	}
 
@@ -61,6 +59,11 @@ public class PlaceOrderServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			User loggedUser = (User) request.getSession().getAttribute("user");
+			purchaseOrderService = new PurchaseOrderService(
+					loggedUser.getUsername(), loggedUser.getPassword());
+			iCdService = new CdService(loggedUser.getUsername(),
+					loggedUser.getPassword());
+
 			String cancelOrderButton = request.getParameter("cancelOrder");
 			String confirmOrderButton = request.getParameter("confirmOrder");
 			PurchaseOrder poOrder = new PurchaseOrder();

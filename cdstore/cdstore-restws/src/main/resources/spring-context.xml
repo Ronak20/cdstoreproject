@@ -8,7 +8,8 @@
    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+   http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd ">
 
 	<context:annotation-config />
 
@@ -25,6 +26,36 @@
 	<bean id="cdService" class="com.cdstore.restws.service.CdService"></bean>
 	<bean id="purchaseOrderService" class="com.cdstore.restws.service.PurchaseOrderService"></bean>
 	<bean id="userService" class="com.cdstore.restws.service.UserService"></bean>
+	<bean id="userDetailsService" class="com.cdstore.restws.service.CdStoreUserDetailsService"></bean>
 	<bean id="addressService" class="com.cdstore.restws.service.AddressService"></bean>
+
+	<bean id="digestFilter"
+		class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+		<property name="userDetailsService" ref="userDetailsService" />
+		<property name="authenticationEntryPoint" ref="digestEntryPoint" />
+	</bean>
+	<bean id="digestEntryPoint"
+		class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+		<property name="realmName" value="CD Store Realm" />
+		<property name="key" value="acegi" />
+	</bean>
+
+	<!-- the security namespace configuration -->
+	<sec:http use-expressions="true" entry-point-ref="digestEntryPoint">
+		<sec:intercept-url pattern="/cddrive/**" method="GET"
+			access="hasRole('ROLE_BUYER')" />
+		<sec:intercept-url pattern="/user/details" method="GET"
+			access="hasRole('ROLE_BUYER')" />
+		<sec:intercept-url pattern="/purchase" access="hasRole('ROLE_BUYER')" />
+		<sec:intercept-url pattern="/cddrive" method="POST"
+			access="hasRole('ROLE_ADMIN')" />
+		<sec:custom-filter ref="digestFilter" after="BASIC_AUTH_FILTER" />
+	</sec:http>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider
+			user-service-ref="userDetailsService">
+		</sec:authentication-provider>
+	</sec:authentication-manager>
 
 </beans>

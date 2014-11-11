@@ -4,6 +4,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 import org.glassfish.jersey.filter.LoggingFilter;
 
 /**
@@ -19,12 +20,23 @@ public class CdStoreRestClientConfig {
 	 * 
 	 * @return rest client
 	 */
-	public static Client getRestClient() {
+	public Client getRestClient(String username, String password) {
 		ClientConfig config = new ClientConfig();
 		config.register(new LoggingFilter());
-		
+
+		HttpAuthenticationFeature feature = HttpAuthenticationFeature
+				.universalBuilder().credentialsForDigest(username, password)
+				.build();
+
 		Client client = ClientBuilder.newClient(config);
+		client.register(feature);
 		return client;
 	}
 
+	public Client getRestClient() {
+		ClientConfig config = new ClientConfig();
+		config.register(new LoggingFilter());
+		Client client = ClientBuilder.newClient(config);
+		return client;
+	}
 }

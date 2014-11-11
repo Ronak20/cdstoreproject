@@ -12,6 +12,7 @@ import com.cdstore.model.PurchaseOrder;
 import com.cdstore.model.PurchaseOrderItem;
 import com.cdstore.model.PurchaseOrderItemId;
 import com.cdstore.model.User;
+import com.cdstore.webapp.TestConstant;
 import com.cdstore.webapp.restclient.PurchaseOrderRestClient;
 import com.cdstore.webapp.restclient.def.IPurchaseOrderRestClient;
 
@@ -20,7 +21,9 @@ public class PurchaseOrderRestClientTest extends TestCase {
 	private IPurchaseOrderRestClient purchaseOrderRestClient;
 
 	public void setUp() throws Exception {
-		purchaseOrderRestClient = new PurchaseOrderRestClient();
+		purchaseOrderRestClient = new PurchaseOrderRestClient(
+				TestConstant.CREDENTIAL_BUYER_USERNAME,
+				TestConstant.CREDENTIAL_BUYER_PASSWORD);
 	}
 
 	public void testPurchase() {

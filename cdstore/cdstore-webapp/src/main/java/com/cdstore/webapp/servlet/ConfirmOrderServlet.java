@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.cdstore.model.CD;
+import com.cdstore.model.User;
 import com.cdstore.webapp.exception.InternalServerException;
 import com.cdstore.webapp.exception.InvalidParameterException;
 import com.cdstore.webapp.exception.NotFoundException;
@@ -46,8 +47,6 @@ public class ConfirmOrderServlet extends HttpServlet {
 	 * Default constructor.
 	 */
 	public ConfirmOrderServlet() {
-		purchaseOrderService = new PurchaseOrderService();
-		iCdService = new CdService();
 	}
 
 	/**
@@ -58,6 +57,11 @@ public class ConfirmOrderServlet extends HttpServlet {
 			final HttpServletResponse response) throws ServletException,
 			IOException {
 		try {
+			User authUser = (User) request.getSession().getAttribute("user");
+			purchaseOrderService = new PurchaseOrderService(
+					authUser.getUsername(), authUser.getPassword());
+			setiCdService(new CdService(authUser.getUsername(),
+					authUser.getPassword()));
 			Integer totalPrice = 0; // the total price that should show up in
 									// shopping cart. We will update in later
 									// according to the request received.

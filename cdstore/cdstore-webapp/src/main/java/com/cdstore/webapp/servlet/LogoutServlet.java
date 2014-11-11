@@ -49,8 +49,8 @@ public class LogoutServlet extends HttpServlet {
 			IOException {
 		logger.info(LogConstant.GET_RECEIVED);
 		request.getSession().invalidate();
-		logger.info(LogConstant.REDIRECT + "/cdShowServlet");
-		this.getServletContext().getRequestDispatcher("/cdShowServlet")
+		logger.info(LogConstant.REDIRECT + "/CdShowServlet");
+		this.getServletContext().getRequestDispatcher("/CdShowServlet")
 				.forward(request, response);
 	}
 

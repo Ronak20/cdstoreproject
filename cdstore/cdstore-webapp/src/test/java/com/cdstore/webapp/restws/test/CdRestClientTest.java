@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import com.cdstore.model.CD;
+import com.cdstore.webapp.TestConstant;
 import com.cdstore.webapp.exception.InternalServerException;
 import com.cdstore.webapp.exception.InvalidParameterException;
 import com.cdstore.webapp.exception.NotFoundException;
@@ -14,26 +15,32 @@ import com.cdstore.webapp.restclient.CdRestClient;
 
 public class CdRestClientTest extends TestCase {
 
-	private CdRestClient cdRestClient;
+	private CdRestClient cdRestClientWithBuyerAuth;
+	private CdRestClient cdRestClientWithAdminAuth;
 
 	public void setUp() throws Exception {
-		cdRestClient = new CdRestClient();
+		cdRestClientWithBuyerAuth = new CdRestClient(
+				TestConstant.CREDENTIAL_BUYER_USERNAME,
+				TestConstant.CREDENTIAL_BUYER_PASSWORD);
+		cdRestClientWithAdminAuth = new CdRestClient(
+				TestConstant.CREDENTIAL_ADMIN_USERNAME,
+				TestConstant.CREDENTIAL_ADMIN_PASSWORD);
 	}
 
 	public void testGetAll() throws InternalServerException, NotFoundException {
-		List<CD> cdList = cdRestClient.getAll();
-		Assert.assertTrue(cdList.size() == 9);
+		List<CD> cdList = cdRestClientWithBuyerAuth.getAll();
+		Assert.assertTrue(cdList.size() == 11);
 	}
 
 	public void testGetAllCDCategories() throws InternalServerException,
 			NotFoundException {
-		List<String> cdList = cdRestClient.getAllCDCategories();
+		List<String> cdList = cdRestClientWithBuyerAuth.getAllCDCategories();
 		Assert.assertTrue(cdList.size() == 3);
 	}
 
 	public void testGetAllCDsForCategory() throws InternalServerException,
 			NotFoundException, InvalidParameterException {
-		List<CD> cdList = cdRestClient.getAllCDsForCategory("POP");
+		List<CD> cdList = cdRestClientWithBuyerAuth.getAllCDsForCategory("POP");
 		Assert.assertTrue(cdList.size() == 3);
 	}
 
@@ -44,7 +51,7 @@ public class CdRestClientTest extends TestCase {
 		cdIds.add("cd002");
 		cdIds.add("cd003");
 
-		List<CD> cdList = cdRestClient.getCds(cdIds);
+		List<CD> cdList = cdRestClientWithBuyerAuth.getCds(cdIds);
 
 		for (CD cd : cdList) {
 			Assert.assertNotNull(cd.getCdId());
@@ -56,8 +63,19 @@ public class CdRestClientTest extends TestCase {
 
 	}
 
-	public void tearDown() {
+	public void testAddCD() throws Exception {
+		CD cd = new CD();
+		cd.setCdId("cd0011");
+		cd.setCategory("COUNTRY");
+		cd.setPrice(3000);
+		cd.setTitle("Ron's Hit");
 
+		cdRestClientWithAdminAuth.save(cd);
+	}
+
+	public void tearDown() {
+		cdRestClientWithBuyerAuth = null;
+		cdRestClientWithAdminAuth = null;
 	}
 
 }

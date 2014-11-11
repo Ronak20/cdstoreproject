@@ -70,6 +70,27 @@ public class UserDao implements IUserDao {
 	}
 
 	@Transactional
+	public User getUserByUsername(String userName) {
+		logger.info(LogConstant.ENTERED + "getUserByUsername");
+		logger.info(LogConstant.PARAMETER + "userName :" + userName);
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(
+				User.class);
+		criteria.add(Restrictions.eq("username", userName));
+
+		if (userName != null && !userName.isEmpty()) {
+			List<User> userList = criteria.list();
+			if (userList != null) {
+				User dbUser = userList.get(0);
+				return dbUser;
+			}
+		}
+
+		logger.debug(LogConstant.RETURN + "userList :" + null);
+		logger.info(LogConstant.EXITED + "getUserByUsername");
+		return null;
+	}
+
+	@Transactional
 	public User getUser(String userId) {
 		logger.info(LogConstant.ENTERED + "getUser");
 		logger.info(LogConstant.PARAMETER + "userId :" + userId);

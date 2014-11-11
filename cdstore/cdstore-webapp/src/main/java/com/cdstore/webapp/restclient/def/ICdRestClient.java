@@ -50,4 +50,12 @@ public interface ICdRestClient {
 	 */
 	List<CD> getCds(List<String> cdIds) throws InternalServerException,
 			NotFoundException, InvalidParameterException;
+
+	/**
+	 * saves cd
+	 * 
+	 * @param cd
+	 *            to add
+	 */
+	void save(CD cd);
 }

@@ -94,7 +94,7 @@ public class UserRest implements IUserRest {
 
 		List<PurchaseOrder> purchaseOrderList = iPurchaseOrderService
 				.getPurchaseOrder(userId);
-		
+
 		user.setPurchaseOrderList(purchaseOrderList);
 
 		return user;

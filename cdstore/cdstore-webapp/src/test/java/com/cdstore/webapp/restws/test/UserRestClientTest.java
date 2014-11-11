@@ -9,6 +9,7 @@ import com.cdstore.model.Address;
 import com.cdstore.model.PurchaseOrder;
 import com.cdstore.model.PurchaseOrderItem;
 import com.cdstore.model.User;
+import com.cdstore.webapp.TestConstant;
 import com.cdstore.webapp.restclient.UserRestClient;
 import com.cdstore.webapp.restclient.def.IUserRestClient;
 
@@ -21,14 +22,19 @@ import com.cdstore.webapp.restclient.def.IUserRestClient;
 public class UserRestClientTest extends TestCase {
 
 	private IUserRestClient userRestClient;
+	private IUserRestClient userRestClientWithAuth;
 
 	public void setUp() throws Exception {
 		userRestClient = new UserRestClient();
+		userRestClientWithAuth = new UserRestClient(
+				TestConstant.CREDENTIAL_BUYER_USERNAME,
+				TestConstant.CREDENTIAL_BUYER_PASSWORD);
 	}
 
 	public void testAuthenticateUser() {
 		User user = new User();
 		user.setUsername("jon");
+		// user.setPassword("6cb570acdab0e0bfc8e3dcb7bb4edf");
 		user.setPassword("6cb570acdab0e0bfc8e3dcb7bb4edf");
 
 		userRestClient.authenticate(user);
@@ -39,7 +45,7 @@ public class UserRestClientTest extends TestCase {
 
 	public void testGetUserDetails() {
 
-		User user = userRestClient.getUser("9");
+		User user = userRestClientWithAuth.getUser("9");
 
 		Assert.assertNotNull(user.getFirstName());
 		Assert.assertNotNull(user.getLastName());

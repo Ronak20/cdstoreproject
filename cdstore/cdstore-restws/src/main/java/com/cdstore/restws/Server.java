@@ -1,9 +1,13 @@
 package com.cdstore.restws;
 
 import java.io.IOException;
+import java.util.EnumSet;
+
+import javax.servlet.DispatcherType;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.servlet.FilterRegistration;
 import org.glassfish.grizzly.servlet.ServletRegistration;
 import org.glassfish.grizzly.servlet.WebappContext;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -30,6 +34,12 @@ public class Server {
 				"classpath*:spring-context.xml");
 		webappContext
 				.addListener("org.springframework.web.context.ContextLoaderListener");
+
+		FilterRegistration testFilterReg = webappContext.addFilter(
+				"springSecurityFilterChain",
+				"org.springframework.web.filter.DelegatingFilterProxy");
+		testFilterReg.addMappingForUrlPatterns(
+				EnumSet.allOf(DispatcherType.class), "/*");
 
 		// Create a servlet registration for the web application in order to
 		// wire up Spring managed collaborators to Jersey resources.

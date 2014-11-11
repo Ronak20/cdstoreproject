@@ -23,6 +23,10 @@ public class CdService implements ICdService {
 	public CdService() {
 		setiCdRestClient(new CdRestClient());
 	}
+	
+	public CdService(String username, String password) {
+		setiCdRestClient(new CdRestClient(username, password));
+	}
 
 	public ICdRestClient getiCdRestClient() {
 		return iCdRestClient;

@@ -31,7 +31,14 @@ public class UserRestClient implements IUserRestClient {
 	private static Logger logger = LogManager.getLogger(UserRestClient.class);
 
 	public UserRestClient() {
-		setRestClient(CdStoreRestClientConfig.getRestClient());
+		CdStoreRestClientConfig cdStoreRestClientConfig = new CdStoreRestClientConfig();
+		setRestClient(cdStoreRestClientConfig.getRestClient());
+		webTarget = restClient.target(AppConstant.REST_URL);
+	}
+
+	public UserRestClient(String username, String password) {
+		CdStoreRestClientConfig cdStoreRestClientConfig = new CdStoreRestClientConfig();
+		cdStoreRestClientConfig.getRestClient(username, password);
 		webTarget = restClient.target(AppConstant.REST_URL);
 	}
 

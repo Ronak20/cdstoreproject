@@ -15,8 +15,8 @@ public class PurchaseOrderService implements IPurchaseOrderService {
 
 	private IPurchaseOrderRestClient purchaseOrderRestClient;
 	
-	public PurchaseOrderService() {
-		setPurchaseOrderClient(new PurchaseOrderRestClient());
+	public PurchaseOrderService(String username,String password) {
+		setPurchaseOrderClient(new PurchaseOrderRestClient(username,password));
 	}
 
 	public IPurchaseOrderRestClient getUserRestClient() {

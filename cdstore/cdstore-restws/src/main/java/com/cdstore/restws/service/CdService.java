@@ -47,4 +47,8 @@ public class CdService implements ICdService {
 	public List<CD> getCds(List<String> cdIds) throws Exception {
 		return cdDao.getCds(cdIds);
 	}
+
+	public void save(CD cd) {
+		cdDao.save(cd);
+	}
 }

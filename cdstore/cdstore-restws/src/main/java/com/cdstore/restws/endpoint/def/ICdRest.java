@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ws.rs.core.Response;
 
+import com.cdstore.model.CD;
+
 /**
  * rest endpoint definition for cd
  * 
@@ -42,4 +44,10 @@ public interface ICdRest {
 	 * @return list of cd json objct
 	 */
 	Response getCds(List<String> cdIds);
+
+	/**
+	 * 
+	 * @param cd
+	 */
+	Response save(CD cd);
 }
